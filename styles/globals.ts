@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 // CSS RESET
 *, *::before, *::after {
     box-sizing: border-box; 
@@ -11,19 +11,31 @@ export default createGlobalStyle`
 }
 
 html, body {
-  font-family: 'Poppins', sans-serif;
+  font-family: ${({ theme }) => theme.typography.fonts.thicccboi};
   height: 100%;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  
+  min-height: 100vh;
+  background-color: var(--c-background);
+  color: var(--c-neutral-100);
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 :root {
   // 🎨 COLOR VARIABLES
-  --c-accent:         #FC5842; 
+  --c-accent:         #FC5842;
+
+  --c-background:     #181818; 
 
   --c-red-secondary:  #D1311C;
   --c-pink-secondary: #FFF0EE;
@@ -44,5 +56,6 @@ body {
   --c-system-red-100: #FFEFF0;
   --c-system-orange:  #FF9E2C;
 }  
-
 `;
+
+export default GlobalStyle;
