@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { Spinner } from "../../spinners";
+import { Spinner } from "../../Spinner";
 
 const PrimaryButton = ({ children, isLoading, onClick }: IButtonProps) => {
   return <Root onClick={onClick}>{!isLoading ? children : <Spinner />}</Root>;

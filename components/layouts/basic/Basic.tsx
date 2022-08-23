@@ -1,8 +1,8 @@
 import GlobalStyle from "../../../styles/globals";
 import { ReactNode } from "react";
-import { Container } from "../container";
-import { Header } from "../../header";
-import { Footer } from "../../footer";
+import { Container } from "../Container";
+import { Header } from "../../Header";
+import { Footer } from "../../Footer";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../../../styles/theme";
 

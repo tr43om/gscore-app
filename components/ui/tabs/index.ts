@@ -1,1 +1,1 @@
-export * from "./progressTabs";
+export * from "../../ProgressTabs";
