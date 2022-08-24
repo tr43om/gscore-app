@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Typography } from "../ui/typography";
+import { Typography } from "../../typography";
 import { useTheme } from "styled-components";
-import { variantType } from "../../types";
+import { variantType } from "../../../../types";
 
 const ProgressTabs = (props: ProgressTabsProps) => {
   const { typography } = useTheme();
