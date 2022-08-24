@@ -14,32 +14,23 @@ import {
   FormInput,
 } from "../../components";
 
+import { signup } from "../../store";
+import { selectUser } from "../../store";
+import { useAppDispatch } from "../../store/store";
+import { useSelector } from "react-redux";
+
 const Signup: NextPage = () => {
   const { typography } = useTheme();
   const { fonts, variants } = typography;
   const router = useRouter();
 
-  const schema = yup.object().shape({
-    username: yup
-      .string()
-      .min(3, "Username should be at least 3 characters")
-      .max(20, "Username is too long"),
-    email: yup
-      .string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    password: yup
-      .string()
-      .required("Please Enter your password")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-      ),
-  });
+  const dispatch = useAppDispatch();
+  const { userInfo, success } = useSelector(selectUser);
 
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { isSubmitSuccessful },
   } = useForm({
     defaultValues: {
@@ -52,12 +43,14 @@ const Signup: NextPage = () => {
     mode: "onChange",
   });
 
-  useEffect(() => {
-    if (isSubmitSuccessful) router.push("/signin");
-  }, [isSubmitSuccessful, router]);
+  // useEffect(() => {
+  //   if (success) router.push("/signin");
+  // }, [success, router]);
 
   const onSubmit = () => {
-    console.log("it works");
+    const data = getValues();
+    dispatch(signup(data));
+    console.log(userInfo);
   };
 
   return (
@@ -103,6 +96,24 @@ const Signup: NextPage = () => {
     </Main>
   );
 };
+
+const schema = yup.object().shape({
+  username: yup
+    .string()
+    .min(3, "Username should be at least 3 characters")
+    .max(20, "Username is too long"),
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .required("Please Enter your password")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+    ),
+});
 
 const Main = styled.main`
   width: 100%;

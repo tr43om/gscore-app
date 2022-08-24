@@ -15,11 +15,17 @@ import {
 } from "../../components";
 
 import { NextPage } from "next";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../store/store";
+import { login } from "../../store";
+import { selectUser } from "../../store";
 
 const Signin: NextPage = () => {
   const { typography } = useTheme();
   const { fonts, variants } = typography;
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { userInfo, success } = useSelector(selectUser);
 
   const schema = yup.object().shape({
     email: yup
@@ -45,12 +51,15 @@ const Signin: NextPage = () => {
   });
 
   // useEffect(() => {
-  //   if (isSubmitSuccessful) router.push("/");
-  // }, [isSubmitSuccessful, router]);
+  //   if (success) router.push("/");
+  // }, [success, router]);
 
   const onSubmit = () => {
-    const { email, password } = getValues();
+    const data = getValues();
+    dispatch(login(data));
   };
+
+  console.log(userInfo);
   return (
     <Main>
       <ProgressTabs $step={2} $mb="4rem" />
