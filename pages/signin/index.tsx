@@ -15,10 +15,10 @@ import {
 } from "../../components";
 
 import { NextPage } from "next";
-import { login } from "../../store/ducks/user/actions";
-import { useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/ducks/user/selectors";
+import { useAppDispatch } from "../../store/store";
+import { login } from "../../store";
+import { selectUser } from "../../store";
 
 const Signin: NextPage = () => {
   const { typography } = useTheme();
@@ -50,16 +50,16 @@ const Signin: NextPage = () => {
     mode: "onChange",
   });
 
-  useEffect(() => {
-    if (success) router.push("/");
-  }, [success, router]);
+  // useEffect(() => {
+  //   if (success) router.push("/");
+  // }, [success, router]);
 
   const onSubmit = () => {
     const data = getValues();
     dispatch(login(data));
   };
 
-  console.log(success);
+  console.log(userInfo);
   return (
     <Main>
       <ProgressTabs $step={2} $mb="4rem" />

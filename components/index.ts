@@ -1,5 +1,5 @@
-export * from "./layouts/basic";
-export * from "./layouts/container";
+export * from "./layouts/Basic";
+export * from "./layouts/Container";
 export * from "./header";
 export * from "./footer";
 export * from "./FormInput";

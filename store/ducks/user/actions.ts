@@ -1,17 +1,6 @@
-import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const login = createAsyncThunk(
-  "user/login",
-  async (
-    { email, password }: { email: string; password: string },
-    { rejectWithValue }
-  ) => {
-    const { data } = await axios.post(
-      "https://gscore-back.herokuapp.com/api/users/sign-in",
-      { email, password }
-    );
+import { logIn, signUp } from "../../../pages/api";
 
-    return data;
-  }
-);
+export const login = createAsyncThunk("user/login", logIn);
+export const signup = createAsyncThunk("user/signup", signUp);

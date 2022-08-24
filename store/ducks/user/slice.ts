@@ -1,18 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { login } from "./actions";
+import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
+import { login, signup } from "./actions";
+import { setToken } from "../../../services";
 
 interface UserSliceState {
   loading: boolean;
   success: boolean;
-  userToken: string;
   userInfo: object;
-  error: boolean | null;
+  error: SerializedError | null;
 }
 
 const initialState: UserSliceState = {
   loading: false,
-  userToken: "",
   success: false,
   error: null,
   userInfo: {},
@@ -21,7 +20,12 @@ const initialState: UserSliceState = {
 export const { actions, reducer } = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      state = initialState;
+      setToken("");
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
       state.loading = true;
@@ -30,12 +34,27 @@ export const { actions, reducer } = createSlice({
     builder.addCase(login.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.userInfo = payload.user;
-      state.userToken = payload.token;
+      setToken(payload.token);
       state.success = true;
     });
-    builder.addCase(login.rejected, (state, { payload }) => {
+    builder.addCase(login.rejected, (state, action) => {
       state.loading = false;
-      // state.error = payload;
+      state.error = action.error;
+    });
+
+    builder.addCase(signup.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(signup.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.userInfo = payload.user;
+      setToken(payload.token);
+      state.success = true;
+    });
+    builder.addCase(signup.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
     });
   },
 });
