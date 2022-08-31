@@ -31,23 +31,30 @@ const Root = styled.button<RootProps>`
   all: unset;
   display: flex;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.neutral100};
-
-  color: ${({ theme }) => theme.colors.accent};
+  background-color: ${({ theme: { colors } }) => colors.neutral100};
+  color: ${({ theme: { colors } }) => colors.accent};
   cursor: pointer;
   width: 100%;
   max-width: ${({ fullWidth }) => (fullWidth ? "100%" : "200px")};
   padding-block: 20px;
   border-radius: 4px;
-  font-family: ${({ theme }) => theme.typography.fonts.thicccboi700};
-  box-shadow: ${({ theme }) => theme.shadows.color03};
+
+  box-shadow: ${({ theme: { shadows } }) => shadows.color03};
+
+  font: ${({
+    theme: {
+      variants: {
+        textSingle100: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.systemRed400};
+    color: ${({ theme: { colors } }) => colors.systemRed400};
   }
 
   &:focus {
-    outline: 4px solid ${({ theme }) => `${theme.colors.neutral100}4c`};
+    outline: 4px solid ${({ theme: { colors } }) => `${colors.neutral100}4c`};
   }
 `;
 

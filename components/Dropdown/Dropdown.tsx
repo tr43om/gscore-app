@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { Typography } from "../ui";
-import { useTheme } from "styled-components";
 import { useState } from "react";
 import { ArrowDownIcon, LogOutIcon, SettingsIcon } from "../../assets";
 
@@ -9,19 +7,12 @@ import { useAppDispatch } from "../../store/store";
 import { logOut } from "../../store/rootReducer";
 
 const Dropdown = (props: DropdownProps) => {
-  const { typography } = useTheme();
-  const { variants, fonts } = typography;
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   return (
     <Root>
       <DropdownLabel onClick={() => setIsOpen((p) => !p)}>
-        <Typography
-          $variant={variants.textSingle300}
-          $fontFamily={fonts.thicccboi500}
-        >
-          {props.label}
-        </Typography>
+        <Label>{props.label}</Label>
         <ArrowIconStyled isOpen={isOpen} />
       </DropdownLabel>
       {isOpen && (
@@ -29,24 +20,13 @@ const Dropdown = (props: DropdownProps) => {
           <Link href="/settings">
             <DropdownItem>
               <SettingsIcon />
-
-              <Typography
-                $variant={variants.textSingle300}
-                $fontFamily={fonts.thicccboi500}
-              >
-                Settings
-              </Typography>
+              <Label>Settings</Label>
             </DropdownItem>
           </Link>
           <Link href="/">
             <DropdownItem onClick={() => dispatch(logOut())}>
               <LogOutIcon />
-              <Typography
-                $variant={variants.textSingle300}
-                $fontFamily={fonts.thicccboi500}
-              >
-                Logout
-              </Typography>
+              <Label>Logout</Label>
             </DropdownItem>
           </Link>
         </DropdownItems>
@@ -77,9 +57,7 @@ const DropdownItems = styled.ul`
   padding: 2rem 1.5rem;
   border-radius: 12px;
   list-style: none;
-  font-family: ${({ theme }) => theme.typography.fonts.thicccboi500};
-
-  background-color: ${({ theme }) => theme.colors.neutral700};
+  background-color: ${({ theme: { colors } }) => colors.neutral700};
 `;
 const DropdownItem = styled.li`
   display: flex;
@@ -88,6 +66,15 @@ const DropdownItem = styled.li`
   color: ${({ theme }) => theme.colors.neutral100};
 `;
 
+const Label = styled.p`
+  font: ${({
+    theme: {
+      variants: {
+        textSingle300: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+`;
 const ArrowIconStyled = styled(ArrowDownIcon)<{ isOpen: boolean }>`
   transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "")};
 `;

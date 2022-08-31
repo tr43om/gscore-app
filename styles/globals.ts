@@ -11,10 +11,14 @@ const GlobalStyle = createGlobalStyle`
 }
 
 html, body {
-  font: ${({ theme }) =>
-    `${[Object.values(theme.typography.variants.paragraphDefault)][0].join(
-      "/"
-    )} ${theme.typography.fonts.thicccboi}`};
+  font: ${({
+    theme: {
+      variants: {
+        paragraphDefault: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  
   height: 100%;
 }
 

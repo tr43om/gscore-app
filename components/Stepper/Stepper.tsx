@@ -1,37 +1,25 @@
 import styled from "styled-components";
-import { Typography } from "../ui/Typography";
-import { useTheme } from "styled-components";
-import { variantType } from "../../types";
 
 const Stepper = (props: StepperProps) => {
-  const { typography } = useTheme();
-  const { variants } = typography;
   return (
     <Root mb={props.$mb || ""}>
-      <Tab>
-        <Typography $variant={props.$font || variants.textSingle300}>
-          Create account
-        </Typography>
+      <Step>
+        <StepTitle>Create account</StepTitle>
         <Bar isActive={props.$step >= 1} />
-      </Tab>
-      <Tab>
-        <Typography $variant={props.$font || variants.textSingle300}>
-          Log in
-        </Typography>
+      </Step>
+      <Step>
+        <StepTitle>Log in</StepTitle>
         <Bar isActive={props.$step >= 2} />
-      </Tab>
-      <Tab>
-        <Typography $variant={props.$font || variants.textSingle300}>
-          Checkout
-        </Typography>
+      </Step>
+      <Step>
+        <StepTitle>Checkout</StepTitle>
         <Bar isActive={props.$step === 3} />
-      </Tab>
+      </Step>
     </Root>
   );
 };
 
 type StepperProps = {
-  $font?: variantType;
   $step: number;
   $mb?: string;
 };
@@ -42,11 +30,21 @@ const Root = styled.div<{ mb: string }>`
   margin-bottom: ${({ mb }) => mb};
 `;
 
-const Tab = styled.div`
+const Step = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   flex-grow: 1;
+`;
+
+const StepTitle = styled.p`
+  font: ${({
+    theme: {
+      variants: {
+        textSingle300: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
 
 const Bar = styled.div<{ isActive: boolean }>`

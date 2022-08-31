@@ -5,7 +5,6 @@ import { Divider, SecondaryButton } from "../ui";
 import { CheckIcon } from "../../assets";
 
 const Product = (props: ProductProps) => {
-  // PRODUCT
   return (
     <Root accent={props.$accent || false}>
       <Info>
@@ -19,7 +18,7 @@ const Product = (props: ProductProps) => {
       <Features>
         {props.features.map((feature, i) => (
           <Feature key={i}>
-            <StyledCheckIcon />
+            <CheckIcon width="29px" height="29px" />
             <span>{feature}</span>
           </Feature>
         ))}
@@ -59,19 +58,26 @@ const Info = styled.div`
 `;
 
 const Price = styled.p`
-  font: ${({ theme }) =>
-    `700 ${[_.values(theme.typography.variants.heading1)][0].join("/")} ${
-      theme.typography.fonts.dmsans
-    }`};
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading1: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
 const Offer = styled.p`
-  font: ${({ theme }) =>
-    `${[_.values(theme.typography.variants.textSingle400)][0].join("/")} ${
-      theme.typography.fonts.thicccboi700
-    }`};
+  font: ${({
+    theme: {
+      variants: {
+        textSingle400: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
+
 const Description = styled.p<{ accent: boolean }>`
-  font-family: ${({ theme }) => theme.typography.fonts.thicccboi500};
+  font-family: ${({ theme: { fonts } }) => fonts.thicccboi500};
   color: ${({ theme, accent }) =>
     !accent ? theme.colors.neutral400 : theme.colors.neutral100};
 `;
@@ -80,10 +86,13 @@ const Features = styled.ul`
   display: grid;
   padding: 0;
   gap: 1.3rem;
-  font: ${({ theme }) =>
-    `${[_.values(theme.typography.variants.textSingle200)][0].join("/")} ${
-      theme.typography.fonts.thicccboi500
-    }`};
+  font: ${({
+    theme: {
+      variants: {
+        textSingle200: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
   margin-top: 2.5rem;
   margin-bottom: 2rem;
   list-style: none;
@@ -93,11 +102,6 @@ const Feature = styled.li`
 
   align-items: center;
   gap: 0.5rem;
-`;
-
-const StyledCheckIcon = styled(CheckIcon)`
-  width: 29px;
-  height: 29px;
 `;
 
 const OfferButton = styled(SecondaryButton)`

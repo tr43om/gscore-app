@@ -1,6 +1,6 @@
 import { Divider } from "../Divider";
 import styled from "styled-components";
-import ShoppingBasket from "./assets/ShoppingBasket.svg";
+import { ShoppingBasketIcon } from "../../../assets";
 
 const CheckoutCard = (props: CheckoutCardProps) => {
   return (
@@ -14,7 +14,7 @@ const CheckoutCard = (props: CheckoutCardProps) => {
         <CheckoutCardPackage>Single site license</CheckoutCardPackage>
         <CheckoutCardPrice>
           <span>$77</span>
-          <ShoppingBasket />
+          <ShoppingBasketIcon />
         </CheckoutCardPrice>
       </CheckoutCardBody>
     </Root>
@@ -41,17 +41,24 @@ const CheckoutCardBody = styled.div`
 `;
 
 const CheckoutCardTitle = styled.h3`
-  font: ${({ theme }) =>
-    `700 ${[Object.values(theme.typography.variants.paragraphLarge)][0].join(
-      "/"
-    )} ${theme.typography.fonts.thicccboi700}`};
+  font: ${({
+    theme: {
+      variants: {
+        paragraphLarge: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  font-weight: 700;
 `;
 
 const CheckoutCardText = styled.p`
-  font: ${({ theme }) =>
-    `${[Object.values(theme.typography.variants.paragraphLarge)][0].join(
-      "/"
-    )} ${theme.typography.fonts.thicccboi}`};
+  font: ${({
+    theme: {
+      variants: {
+        paragraphLarge: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
 
 const CheckoutCardPackage = styled(CheckoutCardText)``;

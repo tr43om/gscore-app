@@ -1,5 +1,4 @@
 export * from "./Socials";
-export * from "./Typography";
 export * from "./inputs";
 export * from "./buttons";
 export * from "./spinners";

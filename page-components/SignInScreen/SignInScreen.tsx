@@ -1,4 +1,3 @@
-import { useTheme } from "styled-components";
 import { useEffect } from "react";
 
 import { useRouter } from "next/router";
@@ -6,13 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styled from "styled-components";
-import {
-  Typography,
-  Stepper,
-  PrimaryButton,
-  FormInput,
-  Error,
-} from "../../components";
+import { Stepper, PrimaryButton, FormInput, Error } from "../../components";
 
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store/store";
@@ -20,8 +13,6 @@ import { login, setAccessToken } from "../../store/rootReducer";
 import { selectUser } from "../../store/rootReducer";
 
 const SignInScreen = (props: SignInScreenProps) => {
-  const { typography } = useTheme();
-  const { fonts, variants } = typography;
   const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
@@ -49,13 +40,7 @@ const SignInScreen = (props: SignInScreenProps) => {
   return (
     <Main>
       <Stepper $step={2} $mb="4rem" />
-      <Typography
-        $variant={variants.specialHeading3}
-        $fontFamily={fonts.thicccboi700}
-        $mb="2rem"
-      >
-        Log in
-      </Typography>
+      <Title mb={2}>Log in</Title>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
@@ -70,7 +55,7 @@ const SignInScreen = (props: SignInScreenProps) => {
           control={control}
           type="password"
         />
-        <PrimaryButton isLoading={user?.loading}>Log in</PrimaryButton>
+        <PrimaryButton isLoading={user.loading}>Log in</PrimaryButton>
       </Form>
       {user?.error && <Error>Incorrect email or password</Error>}
     </Main>
@@ -89,6 +74,17 @@ const Main = styled.main`
   width: 100%;
   max-width: 38.75rem;
   margin: 0 auto;
+`;
+
+const Title = styled.h3<{ mb?: number }>`
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading3: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  margin-bottom: ${({ mb }) => `${mb}rem`};
 `;
 
 const Form = styled.form`

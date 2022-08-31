@@ -46,16 +46,24 @@ const Root = styled.button<RootProps>`
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.accent};
-  color: ${({ theme, textColor }) => theme.colors.neutral100 || textColor};
+  color: ${({ textColor, theme: { colors } }) =>
+    colors.neutral100 || textColor};
   cursor: pointer;
   width: 100%;
   max-width: ${({ fullWidth }) => (fullWidth ? "100%" : "200px")};
   padding-block: 20px;
   border-radius: 4px;
-  font-family: ${({ theme }) => theme.typography.fonts.thicccboi700};
   box-shadow: ${({ theme }) => theme.shadows.color03};
   margin-bottom: ${({ mb }) => mb};
   margin-top: ${({ mt }) => mt};
+
+  font: ${({
+    theme: {
+      variants: {
+        textSingle100: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.systemRed400};

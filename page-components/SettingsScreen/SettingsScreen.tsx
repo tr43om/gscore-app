@@ -2,14 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import styled, { useTheme } from "styled-components";
-import {
-  Error,
-  FormInput,
-  PrimaryButton,
-  Tab,
-  Tabs,
-  Typography,
-} from "../../components";
+import { Error, FormInput, PrimaryButton, Tab, Tabs } from "../../components";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/rootReducer";
 import { useEffect } from "react";
@@ -19,8 +12,6 @@ import { useAppDispatch } from "../../store/store";
 import { changePassword, changePersonalInfo } from "../../store/rootReducer";
 
 const SettingsScreen = (props: SettingsScreenProps) => {
-  const { typography } = useTheme();
-  const { fonts, variants } = typography;
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -73,22 +64,10 @@ const SettingsScreen = (props: SettingsScreenProps) => {
 
   return (
     <Main>
-      <Typography
-        $variant={variants.specialHeading2}
-        $fontFamily={fonts.thicccboi700}
-        $mb="3rem"
-      >
-        Settings
-      </Typography>
+      <Title mb={3}>Settings</Title>
       <Tabs $mb="3rem">
         <Tab title="Personal info">
-          <Typography
-            $variant={variants.specialHeading4}
-            $fontFamily={fonts.thicccboi700}
-            $mb="1.5rem"
-          >
-            Personal Info
-          </Typography>
+          <Title mb={1.5}>Personal Info</Title>
           <Form
             onSubmit={handlePersonalInfoSubmit(savePersonalInfo)}
             key="Personal info form"
@@ -111,13 +90,7 @@ const SettingsScreen = (props: SettingsScreenProps) => {
           </Form>
         </Tab>
         <Tab title="Change Password">
-          <Typography
-            $variant={variants.specialHeading4}
-            $fontFamily={fonts.thicccboi700}
-            $mb="1.5rem"
-          >
-            Change Password
-          </Typography>
+          <Title mb={1.5}>Change Password</Title>
 
           <Form
             onSubmit={handleChangePasswordSubmit(saveNewPassword)}
@@ -166,6 +139,17 @@ const changePasswordSchema = yup.object().shape({
 });
 
 const Main = styled.main``;
+
+const Title = styled.h3<{ mb?: number }>`
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading4: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  margin-bottom: ${({ mb }) => `${mb}rem`};
+`;
 
 const Form = styled.form`
   display: flex;

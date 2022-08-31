@@ -14,7 +14,6 @@ const spinAnimation = keyframes`
     from {
         transform: rotate(0turn);
     }
-
     to {
         transform: rotate(1turn);
     }

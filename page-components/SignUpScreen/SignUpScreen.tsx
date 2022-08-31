@@ -1,18 +1,12 @@
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { useEffect } from "react";
 import Link from "next/link";
-import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import {
-  Typography,
-  Stepper,
-  PrimaryButton,
-  FormInput,
-} from "../../components";
+import { Stepper, PrimaryButton, FormInput } from "../../components";
 
 import { signup } from "../../store/rootReducer";
 import { selectUser } from "../../store/rootReducer";
@@ -20,8 +14,6 @@ import { useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
 
 const SignUpScreen = (props: SignUpScreenProps) => {
-  const { typography } = useTheme();
-  const { fonts, variants } = typography;
   const router = useRouter();
 
   const dispatch = useAppDispatch();
@@ -55,17 +47,11 @@ const SignUpScreen = (props: SignUpScreenProps) => {
   return (
     <Main>
       <Stepper $step={1} $mb="4rem" />
-      <Typography
-        $variant={variants.specialHeading3}
-        $fontFamily={fonts.thicccboi700}
-        $mb="1rem"
-      >
-        Create account
-      </Typography>
-      <Typography $variant={variants.paragraphSmall} $mb="2rem">
+      <Title mb={1}>Create account</Title>
+      <Description mb={2}>
         You need to enter your name and email. We will send you a temporary
         password by email
-      </Typography>
+      </Description>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormInput name="username" placeholder="Username" control={control} />
         <FormInput
@@ -84,12 +70,9 @@ const SignUpScreen = (props: SignUpScreenProps) => {
         <PrimaryButton isLoading={user?.loading}>Send password</PrimaryButton>
       </Form>
 
-      <Typography $mt="3rem">
-        Have an account?{" "}
-        <Link href="/signin">
-          <StyledLink>Go to the next step</StyledLink>
-        </Link>
-      </Typography>
+      <NextStepLink>
+        Have an account? <Link href="/signin">Go to the next step</Link>
+      </NextStepLink>
     </Main>
   );
 };
@@ -118,6 +101,28 @@ const Main = styled.main`
   margin: 0 auto;
 `;
 
+const Title = styled.h3<{ mb?: number }>`
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading3: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  margin-bottom: ${({ mb }) => `${mb}rem`};
+`;
+
+const Description = styled.p<{ mb?: number }>`
+  font: ${({
+    theme: {
+      variants: {
+        paragraphSmall: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  margin-bottom: ${({ mb }) => `${mb}rem`};
+`;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -125,10 +130,13 @@ const Form = styled.form`
   margin-bottom: 3rem;
 `;
 
-const StyledLink = styled.a`
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.accent};
-  text-decoration: none;
+const NextStepLink = styled.span`
+  margin-top: 3rem;
+  & > * {
+    cursor: pointer;
+    text-decoration: none;
+    color: ${({ theme: { colors } }) => colors.accent};
+  }
 `;
 
 type SignUpScreenProps = {};

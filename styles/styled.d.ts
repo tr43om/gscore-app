@@ -2,17 +2,17 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    typography: {
-      fonts: {
-        [key: string]: string;
-      };
-      variants: {
-        [key: string]: {
-          fontSize: string;
-          lineHeight: string;
-        };
+    fonts: {
+      [key: string]: string;
+    };
+    variants: {
+      [key: string]: {
+        fontSize: string;
+        lineHeight: string;
+        fontFamily: string;
       };
     };
+
     shadows: {
       [key: string]: string;
     };

@@ -1,75 +1,100 @@
 import { DefaultTheme } from "styled-components";
 
+const fonts = {
+  default: "THICCCBOI",
+  thicccboi500: "THICCCBOI500",
+  thicccboi600: "THICCCBOI600",
+  thicccboi700: "THICCCBOI700",
+  inter: "Inter",
+  dmsans: "DM Sans",
+};
+
 const variants = {
   specialHeading1: {
     fontSize: "4.875rem", //78px
     lineHeight: "86px",
+    fontFamily: fonts.dmsans,
   },
   specialHeading2: {
     fontSize: "3.375rem", //54px
     lineHeight: "64px",
+    fontFamily: fonts.thicccboi700,
   },
   specialHeading3: {
     fontSize: "2.75rem", //44px
     lineHeight: "54px",
+    fontFamily: fonts.thicccboi700,
   },
   specialHeading4: {
     fontSize: "1.75rem", //28px
     lineHeight: "40px",
+    fontFamily: fonts.thicccboi700,
   },
   heading1: {
     fontSize: "3.375rem", //54px
     lineHeight: "66px",
+    fontFamily: fonts.thicccboi700,
   },
   heading2: {
     fontSize: "2,375rem", //38px
     lineHeight: "50px",
+    fontFamily: fonts.thicccboi700,
   },
   heading3: {
     fontSize: "1.5rem", //24px
     lineHeight: "34px",
+    fontFamily: fonts.thicccboi700,
   },
   heading4: {
     fontSize: "1.125rem", //18px
     lineHeight: "24px",
+    fontFamily: fonts.thicccboi700,
   },
 
   heading5: {
     fontSize: "1rem", //16px
     lineHeight: "22px",
+    fontFamily: fonts.thicccboi700,
   },
 
   paragraphLarge: {
     fontSize: "1.5rem", //24px
     lineHeight: "38px",
+    fontFamily: fonts.default,
   },
   paragraphDefault: {
     fontSize: "1.125rem", //18px
     lineHeight: "30px",
+    fontFamily: fonts.default,
   },
   paragraphSmall: {
     fontSize: "0.875rem", //14px
     lineHeight: "24px",
+    fontFamily: fonts.default,
   },
 
   textSingle400: {
     fontSize: "1.5rem", //24px
     lineHeight: "26px",
+    fontFamily: fonts.thicccboi700,
   },
 
   textSingle300: {
     fontSize: "1.25rem", //20px
     lineHeight: "22px",
+    fontFamily: fonts.thicccboi500,
   },
 
   textSingle200: {
     fontSize: "1.125rem", //18px
     lineHeight: "20px",
+    fontFamily: fonts.thicccboi500,
   },
 
   textSingle100: {
     fontSize: "1rem", // 16px
     lineHeight: "18px",
+    fontFamily: fonts.thicccboi700,
   },
 };
 
@@ -94,15 +119,6 @@ const colors = {
   background: "#181818",
 };
 
-const fonts = {
-  thicccboi: "THICCCBOI",
-  thicccboi500: "THICCCBOI500",
-  thicccboi600: "THICCCBOI600",
-  thicccboi700: "THICCCBOI700",
-  inter: "Inter",
-  dmsans: "DM Sans",
-};
-
 const shadows = {
   color01: "0px 4px 10px rgba(252, 88, 66, 0.1)",
   color02: "0px 6px 20px rgba(252, 88, 66, 0.14)",
@@ -113,10 +129,8 @@ const shadows = {
 };
 
 export const theme: DefaultTheme = {
-  typography: {
-    fonts,
-    variants,
-  },
+  fonts,
+  variants,
   shadows,
   colors,
 };

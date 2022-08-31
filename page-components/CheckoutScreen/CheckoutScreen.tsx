@@ -1,10 +1,5 @@
-import styled, { useTheme } from "styled-components";
-import {
-  PrimaryButton,
-  Stepper,
-  Typography,
-  CheckoutCard,
-} from "../../components";
+import styled from "styled-components";
+import { PrimaryButton, Stepper, CheckoutCard } from "../../components";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,25 +8,17 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../store/rootReducer";
 
 const CheckoutScreen = () => {
-  const { typography } = useTheme();
-  const { fonts, variants } = typography;
   const user = useSelector(selectUser);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user?.isAuthorized) router.push("/signup");
-  }, [router, user]);
+  // useEffect(() => {
+  //   if (!user?.isAuthorized) router.push("/signup");
+  // }, [router, user]);
 
   return (
     <Main>
       <Stepper $step={3} $mb="4rem" />
-      <Typography
-        $variant={variants.specialHeading3}
-        $fontFamily={fonts.thicccboi700}
-        $mb="2rem"
-      >
-        Checkout
-      </Typography>
+      <Title mb={2}>Checkout</Title>
 
       <CheckoutCard />
       <TotalInfo>
@@ -51,14 +38,28 @@ const Main = styled.main`
   margin: 0 auto;
 `;
 
+const Title = styled.h1<{ mb?: number }>`
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading3: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  margin-bottom: ${({ mb }) => `${mb}rem`};
+`;
+
 const TotalInfo = styled.p`
   display: flex;
   justify-content: space-between;
   margin-bottom: 3rem;
-  font: ${({ theme }) =>
-    `700 ${[Object.values(theme.typography.variants.specialHeading4)][0].join(
-      "/"
-    )} ${theme.typography.fonts.thicccboi700}`};
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading4: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
 const TotalTitle = styled.p``;
 const TotalPrice = styled.p``;

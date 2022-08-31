@@ -28,7 +28,7 @@ const Footer = (props: FooterProps) => {
 type FooterProps = {};
 
 const FooterContainer = styled.footer`
-  border-top: 1px solid ${({ theme }) => theme.colors.neutral700};
+  border-top: 1px solid ${({ theme: { colors } }) => colors.neutral700};
   padding-top: 3.75rem;
   padding-bottom: 3rem;
   margin-top: 5rem;
@@ -36,10 +36,10 @@ const FooterContainer = styled.footer`
 
   font-family: "Inter", sans-serif;
 
-  color: ${({ theme }) => theme.colors.neutral400};
+  color: ${({ theme: { colors } }) => colors.neutral400};
 
   a {
-    color: ${({ theme }) => theme.colors.neutral100};
+    color: ${({ theme: { colors } }) => colors.neutral100};
   }
 `;
 
@@ -48,7 +48,11 @@ const FooterWrapper = styled.div`
   max-width: 79.125rem;
   padding-inline: 1rem;
   margin: 0 auto;
-  font-family: ${({ theme }) => theme.typography.fonts.inter};
+  font-family: ${({
+    theme: {
+      fonts: { inter },
+    },
+  }) => inter};
   font-weight: 500;
 `;
 
@@ -60,7 +64,7 @@ const FooterBottom = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 2.75rem;
-  border-top: 1px solid ${({ theme }) => theme.colors.neutral700};
+  border-top: 1px solid ${({ theme: { colors } }) => colors.neutral700};
 `;
 
 const CopyrightText = styled.div``;

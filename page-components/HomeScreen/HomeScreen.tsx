@@ -1,7 +1,6 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import styled from "styled-components";
-import { Typography, ProductsList } from "../../components";
+import { ProductsList } from "../../components";
 
 const HomeScreen = (props: HomeScreenProps) => {
   return (
@@ -19,9 +18,14 @@ const HomeScreen = (props: HomeScreenProps) => {
   );
 };
 
-const Title = styled(Typography)`
-  font: ${({ theme }) =>
-    `${theme.typography.variants.specialHeading3.fontSize}/${theme.typography.variants.specialHeading3.lineHeight} ${theme.typography.fonts.thicccboi700}`};
+const Title = styled.h1`
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading3: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
   text-align: center;
   margin-bottom: 6.125rem;
 `;

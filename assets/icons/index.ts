@@ -4,7 +4,7 @@ export { default as SettingsIcon } from "./SettingsIcon";
 
 export { default as CheckIcon } from "./CheckIcon";
 
-export { default as ShoppingBasketIcon } from "./ShoppingBasketIcon";
+export { default as ShoppingBasketIcon } from "./ShoppingBasket";
 export { default as ErrorIcon } from "./ErrorIcon";
 export { default as SuccessIcon } from "./SuccessIcon";
 

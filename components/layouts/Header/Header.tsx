@@ -48,15 +48,20 @@ const Navigation = styled.nav`
 
 const StyledLink = styled.a`
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.neutral100};
-  font-family: ${({ theme }) => theme.typography.fonts.thicccboi500};
-  font-size: ${({ theme }) => theme.typography.variants.textSingle300.fontSize};
-  line-height: ${({ theme }) =>
-    theme.typography.variants.textSingle300.lineHeight};
+
+  font: ${({
+    theme: {
+      variants: {
+        textSingle300: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+
+  color: ${({ theme: { colors } }) => colors.neutral100};
   text-decoration: none;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme: { colors } }) => colors.accent};
   }
 `;
 
