@@ -1,32 +1,25 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { Error, FormInput, PrimaryButton, Tab, Tabs } from "../../components";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/rootReducer";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 import { useAppDispatch } from "../../store/store";
 import { changePassword, changePersonalInfo } from "../../store/rootReducer";
+import { PersonalDataType, ChangePasswordType } from "../../types";
 
 const SettingsScreen = (props: SettingsScreenProps) => {
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   if (!isAuthorized) router.push("/signup");
-  // }, [isAuthorized, router]);
 
   // Form hook for "Personal Info" tab
   const {
     handleSubmit: handlePersonalInfoSubmit,
     control: personalInfoControl,
-    getValues: getPersonalInfo,
     formState: { isSubmitSuccessful: isChangePersonalDataSuccessful },
-  } = useForm({
+  } = useForm<PersonalDataType>({
     defaultValues: {
       username: "",
       email: "",
@@ -36,18 +29,15 @@ const SettingsScreen = (props: SettingsScreenProps) => {
     mode: "onChange",
   });
 
-  const savePersonalInfo = () => {
-    const data = getPersonalInfo();
-    dispatch(changePersonalInfo(data));
-  };
+  const savePersonalInfo = handlePersonalInfoSubmit((data) =>
+    dispatch(changePersonalInfo(data))
+  );
 
   // Form hook for "Change Password" tab
   const {
     handleSubmit: handleChangePasswordSubmit,
     control: changePasswordControl,
-    getValues: getPasswords,
-    formState: { isSubmitSuccessful: isChangePasswordSuccessful },
-  } = useForm({
+  } = useForm<ChangePasswordType>({
     defaultValues: {
       currentPassword: "",
       newPassword: "",
@@ -57,10 +47,9 @@ const SettingsScreen = (props: SettingsScreenProps) => {
     mode: "onChange",
   });
 
-  const saveNewPassword = () => {
-    const data = getPasswords();
-    dispatch(changePassword(data));
-  };
+  const saveNewPassword = handleChangePasswordSubmit((data) =>
+    dispatch(changePassword(data))
+  );
 
   return (
     <Main>
@@ -68,23 +57,20 @@ const SettingsScreen = (props: SettingsScreenProps) => {
       <Tabs $mb="3rem">
         <Tab title="Personal info">
           <Title mb={1.5}>Personal Info</Title>
-          <Form
-            onSubmit={handlePersonalInfoSubmit(savePersonalInfo)}
-            key="Personal info form"
-          >
+          <Form onSubmit={savePersonalInfo} key="Personal info form">
             <FormInput
               name="username"
               placeholder="Username"
               control={personalInfoControl}
               type="text"
-              $success={isChangePersonalDataSuccessful && !user?.loading}
+              $success={isChangePersonalDataSuccessful && !user.loading}
             />
             <FormInput
               name="email"
               placeholder="Email"
               control={personalInfoControl}
               type="email"
-              $success={isChangePersonalDataSuccessful && !user?.loading}
+              $success={isChangePersonalDataSuccessful && !user.loading}
             />
             <PrimaryButton isLoading={user?.loading}>Save</PrimaryButton>
           </Form>
@@ -92,10 +78,7 @@ const SettingsScreen = (props: SettingsScreenProps) => {
         <Tab title="Change Password">
           <Title mb={1.5}>Change Password</Title>
 
-          <Form
-            onSubmit={handleChangePasswordSubmit(saveNewPassword)}
-            key="Change password form"
-          >
+          <Form onSubmit={saveNewPassword} key="Change password form">
             <FormInput
               name="currentPassword"
               placeholder="Current Password"

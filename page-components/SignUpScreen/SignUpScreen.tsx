@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -12,19 +10,13 @@ import { signup } from "../../store/rootReducer";
 import { selectUser } from "../../store/rootReducer";
 import { useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
+import { SignUpValues } from "../../types";
 
 const SignUpScreen = (props: SignUpScreenProps) => {
-  const router = useRouter();
-
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
 
-  const {
-    handleSubmit,
-    control,
-    getValues,
-    formState: { isSubmitSuccessful },
-  } = useForm({
+  const { handleSubmit, control } = useForm<SignUpValues>({
     defaultValues: {
       username: "",
       email: "",
@@ -35,14 +27,7 @@ const SignUpScreen = (props: SignUpScreenProps) => {
     mode: "onChange",
   });
 
-  // useEffect(() => {
-  //   if (isAuthorized && !loading) router.push("/signin");
-  // }, [isAuthorized, router, loading]);
-
-  const onSubmit = () => {
-    const data = getValues();
-    dispatch(signup(data));
-  };
+  const signUp = handleSubmit((data) => dispatch(signup(data)));
 
   return (
     <Main>
@@ -52,7 +37,7 @@ const SignUpScreen = (props: SignUpScreenProps) => {
         You need to enter your name and email. We will send you a temporary
         password by email
       </Description>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={signUp}>
         <FormInput name="username" placeholder="Username" control={control} />
         <FormInput
           name="email"

@@ -22,3 +22,13 @@ export type SignUpValues = {
   email: string;
   password: string;
 };
+
+export type PersonalDataType = {
+  email: string;
+  username: string;
+};
+
+export type ChangePasswordType = {
+  currentPassword: string;
+  newPassword: string;
+};

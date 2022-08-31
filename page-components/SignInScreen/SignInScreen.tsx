@@ -29,14 +29,14 @@ const SignInScreen = (props: SignInScreenProps) => {
     mode: "onChange",
   });
 
-  const onSubmit = handleSubmit((data) => dispatch(login(data)));
+  const signIn = handleSubmit((data) => dispatch(login(data)));
 
   return (
     <Main>
       <Stepper $step={2} $mb="4rem" />
       <Title mb={2}>Log in</Title>
 
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={signIn}>
         <FormInput
           name="email"
           placeholder="Email"
