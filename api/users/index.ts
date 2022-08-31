@@ -1,5 +1,6 @@
 import { instance as axios } from "../../services";
 import { setAccessToken } from "../../store/rootReducer";
+import { setCookie } from "cookies-next";
 
 export const fetchLogIn = async ({
   email,
@@ -9,6 +10,8 @@ export const fetchLogIn = async ({
   password: string;
 }) => {
   const { data } = await axios.post("users/sign-in", { email, password });
+  setCookie("accessToken", data.token);
+  console.log(data.token);
   return data;
 };
 

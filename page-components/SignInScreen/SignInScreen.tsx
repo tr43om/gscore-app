@@ -1,23 +1,25 @@
-import { useEffect } from "react";
-
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styled from "styled-components";
-import { Stepper, PrimaryButton, FormInput, Error } from "../../components";
 
+// redux
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store/store";
-import { login, setAccessToken } from "../../store/rootReducer";
+import { login } from "../../store/rootReducer";
 import { selectUser } from "../../store/rootReducer";
 
+// types
+import { SignInValues } from "../../types";
+
+// components
+import { Stepper, PrimaryButton, FormInput, Error } from "../../components";
+
 const SignInScreen = (props: SignInScreenProps) => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
 
-  const { handleSubmit, control, getValues } = useForm({
+  const { handleSubmit, control } = useForm<SignInValues>({
     defaultValues: {
       email: "",
       password: "",
@@ -27,22 +29,14 @@ const SignInScreen = (props: SignInScreenProps) => {
     mode: "onChange",
   });
 
-  // useEffect(() => {
-  //   if (isAuthorized && !loading) router.push("/checkout");
-  // }, [isAuthorized, router, loading]);
-
-  const onSubmit = async () => {
-    const data = getValues();
-    const { payload } = await dispatch(login(data));
-    dispatch(setAccessToken(payload?.token));
-  };
+  const onSubmit = handleSubmit((data) => dispatch(login(data)));
 
   return (
     <Main>
       <Stepper $step={2} $mb="4rem" />
       <Title mb={2}>Log in</Title>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={onSubmit}>
         <FormInput
           name="email"
           placeholder="Email"
