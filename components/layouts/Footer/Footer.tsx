@@ -1,8 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { Container } from "../layouts";
 import Link from "next/link";
-import { Socials } from "../ui";
+import { Socials } from "../../ui";
 
 const Footer = (props: FooterProps) => {
   return (
@@ -29,7 +28,7 @@ const Footer = (props: FooterProps) => {
 type FooterProps = {};
 
 const FooterContainer = styled.footer`
-  border-top: 1px solid var(--c-neutral-700);
+  border-top: 1px solid ${({ theme }) => theme.colors.neutral700};
   padding-top: 3.75rem;
   padding-bottom: 3rem;
   margin-top: 5rem;
@@ -37,10 +36,10 @@ const FooterContainer = styled.footer`
 
   font-family: "Inter", sans-serif;
 
-  color: var(--c-neutral-400);
+  color: ${({ theme }) => theme.colors.neutral400};
 
   a {
-    color: var(--c-neutral-100);
+    color: ${({ theme }) => theme.colors.neutral100};
   }
 `;
 
@@ -49,6 +48,8 @@ const FooterWrapper = styled.div`
   max-width: 79.125rem;
   padding-inline: 1rem;
   margin: 0 auto;
+  font-family: ${({ theme }) => theme.typography.fonts.inter};
+  font-weight: 500;
 `;
 
 const FooterTop = styled.div`
@@ -59,7 +60,7 @@ const FooterBottom = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 2.75rem;
-  border-top: 1px solid var(--c-neutral-700);
+  border-top: 1px solid ${({ theme }) => theme.colors.neutral700};
 `;
 
 const CopyrightText = styled.div``;

@@ -1,1 +1,1 @@
-export * from "../../ProgressTabs";
+export { default as Tabs } from "./Tabs";

@@ -1,8 +1,7 @@
-export * from "./user";
-import { UserReducer } from "./user/slice";
+import { userReducer } from "./user";
 
 export const reducers = {
-  user: UserReducer,
+  user: userReducer,
 };
 
-export { UserActions } from "./user";
+export * from "./user";

@@ -1,1 +1,6 @@
-export { logIn, signUp } from "./auth";
+export {
+  fetchChangePassword,
+  fetchLogIn,
+  fetchSignUp,
+  fetchChangePersonalInfo,
+} from "./users";

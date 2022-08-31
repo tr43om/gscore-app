@@ -4,14 +4,7 @@ declare module "styled-components" {
   export interface DefaultTheme {
     typography: {
       fonts: {
-        [key: string]:
-          | "thicccboi"
-          | "thicccboi500"
-          | "thicccboi600"
-          | "thicccboi700"
-          | "inter"
-          | "dmsans"
-          | string;
+        [key: string]: string;
       };
       variants: {
         [key: string]: {
@@ -21,6 +14,9 @@ declare module "styled-components" {
       };
     };
     shadows: {
+      [key: string]: string;
+    };
+    colors: {
       [key: string]: string;
     };
   }

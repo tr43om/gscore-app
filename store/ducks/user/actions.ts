@@ -1,6 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { logIn, signUp } from "../../../pages/api";
+import {
+  fetchChangePassword,
+  fetchLogIn,
+  fetchSignUp,
+  fetchChangePersonalInfo,
+} from "../../../pages/api";
 
-export const login = createAsyncThunk("user/login", logIn);
-export const signup = createAsyncThunk("user/signup", signUp);
+export const login = createAsyncThunk("user/login", fetchLogIn);
+export const signup = createAsyncThunk("user/signup", fetchSignUp);
+export const changePassword = createAsyncThunk(
+  "user/changePassword",
+  fetchChangePassword
+);
+export const changePersonalInfo = createAsyncThunk(
+  "user/changePersonalInfo",
+  fetchChangePersonalInfo
+);

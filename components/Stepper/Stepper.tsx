@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { Typography } from "../../typography";
+import { Typography } from "../ui/Typography";
 import { useTheme } from "styled-components";
-import { variantType } from "../../../../types";
+import { variantType } from "../../types";
 
-const ProgressTabs = (props: ProgressTabsProps) => {
+const Stepper = (props: StepperProps) => {
   const { typography } = useTheme();
   const { variants } = typography;
   return (
@@ -30,7 +30,7 @@ const ProgressTabs = (props: ProgressTabsProps) => {
   );
 };
 
-type ProgressTabsProps = {
+type StepperProps = {
   $font?: variantType;
   $step: number;
   $mb?: string;
@@ -53,9 +53,9 @@ const Bar = styled.div<{ isActive: boolean }>`
   height: 8px;
   width: 100%;
 
-  background-color: ${({ isActive }) =>
-    isActive ? "var(--c-accent)" : "var(--c-neutral-700)"};
+  background-color: ${({ isActive, theme }) =>
+    isActive ? theme.colors.accent : theme.colors.neutral700};
   border-radius: 10px;
 `;
 
-export default ProgressTabs;
+export default Stepper;

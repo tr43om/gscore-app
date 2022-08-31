@@ -9,6 +9,7 @@ const Typography = ({
   $fontFamily,
   $mb,
   $mt,
+  className,
 }: TypographyProps) => {
   return (
     <Root
@@ -17,6 +18,7 @@ const Typography = ({
       fontFamily={$fontFamily}
       mb={$mb || ""}
       mt={$mt || ""}
+      className={className}
     >
       {children}
     </Root>
@@ -34,6 +36,7 @@ type TypographyProps = {
   $fontWeight?: string;
   $mb?: string;
   $mt?: string;
+  className?: string;
 };
 
 const Root: any = styled.div<RootProps>`
@@ -47,6 +50,7 @@ const Root: any = styled.div<RootProps>`
     fontFamily || theme.typography.fonts.thicccboi};
   margin-bottom: ${({ mb }) => mb};
   margin-top: ${({ mt }) => mt};
+  color: ${({ theme }) => theme.colors.neutral100};
 `;
 
 type RootProps = {

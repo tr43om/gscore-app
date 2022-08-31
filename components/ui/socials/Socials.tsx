@@ -34,7 +34,7 @@ const Icon = styled.a`
   }
 
   &:hover > svg > path {
-    fill: var(--c-accent);
+    fill: ${({ theme }) => theme.colors.accent};
   }
 `;
 

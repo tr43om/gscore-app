@@ -1,2 +1,4 @@
-export * from "./basic";
-export * from "./container";
+export * from "./Basic";
+export * from "./Container";
+export * from "./Footer";
+export * from "./Header";

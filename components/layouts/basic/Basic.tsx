@@ -1,8 +1,8 @@
 import GlobalStyle from "../../../styles/globals";
 import { ReactNode } from "react";
-import { Container } from "../container";
-import { Header } from "../../header";
-import { Footer } from "../../footer";
+import { Container } from "../Container";
+import { Header } from "../Header";
+import { Footer } from "../Footer";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../../../styles/theme";
 import { store, persistor } from "../../../store/store";
@@ -11,18 +11,18 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 
 const BasicLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Container>
-        <Header />
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Container>
+            <Header />
             {children}
-          </PersistGate>
-        </Provider>
-      </Container>
-      <Footer />
-    </ThemeProvider>
+          </Container>
+          <Footer />
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 

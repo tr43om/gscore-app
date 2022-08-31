@@ -34,6 +34,7 @@ const FormInput = <TFormValues extends FieldValues>(
         value={value}
         type={props.type}
         $error={Boolean(errors[props.name])}
+        $success={props.$success}
       />
       {errors[props.name]?.message && <Error>{errorMessage}</Error>}
     </FieldContainer>
@@ -45,6 +46,7 @@ interface FormInputProps<TFormValues extends FieldValues>
     Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue"> {
   button?: ReactNode;
   name: Path<TFormValues>;
+  $success?: boolean;
 }
 
 const FieldContainer = styled.div`

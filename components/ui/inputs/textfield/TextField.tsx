@@ -40,26 +40,26 @@ const Input = styled.input<{
 }>`
   width: 100%;
   outline: none;
-  color: var(--c-neutral-700);
+  color: ${({ theme }) => theme.colors.neutral700};
 
   padding: 25px 23px;
   border-radius: 6px;
-  caret-color: var(--c-accent);
+  caret-color: ${({ theme }) => theme.colors.accent};
 
   border: 1px solid
-    ${({ error, success }) => {
+    ${({ error, success, theme }) => {
       if (error) {
-        return "var(--c-system-red-300)";
+        return theme.colors.systemRed300;
       } else if (success) {
-        return "var(--c-system-green)";
+        return theme.colors.systemGreen;
       } else {
-        return "var(--c-neutral-300)";
+        return theme.colors.neutral300;
       }
     }};
   box-shadow: ${({ theme }) => theme.shadows.color02};
 
   &::placeholder {
-    color: var(--c-neutral-500);
+    color: ${({ theme }) => theme.colors.neutral500};
   }
 `;
 
@@ -69,7 +69,7 @@ const StyledSuccessIcon = styled(SuccessIcon)<{ success: boolean }>`
   top: 25px;
   right: 23px;
   & > path {
-    stroke: var(--c-system-green);
+    stroke: ${({ theme }) => theme.colors.systemGreen};
   }
 `;
 
@@ -79,7 +79,7 @@ const StyledErrorIcon = styled(ErrorIcon)<{ error: boolean }>`
   top: 25px;
   right: 23px;
   & > path {
-    stroke: var(--c-system-red-300);
+    stroke: ${({ theme }) => theme.colors.systemRed300};
   }
 `;
 
