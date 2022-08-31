@@ -1,8 +1,8 @@
+import _ from "lodash";
 import styled from "styled-components";
 import { Divider, SecondaryButton } from "../ui";
-import _ from "lodash";
 
-import CheckIcon from "./assets/CheckIcon.svg";
+import { CheckIcon } from "../../assets";
 
 const Product = (props: ProductProps) => {
   // PRODUCT

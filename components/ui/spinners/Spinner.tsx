@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import IconSpinner from "./assets/Spinner.svg";
+import { SpinnerIcon } from "../../../assets";
 import { keyframes } from "styled-components";
 
 const Spinner = ({ $color }: SpinnerProps) => {
-  return <StyledSpinner color={$color} />;
+  return <StyledSpinner stroke={$color} />;
 };
 
 type SpinnerProps = {
@@ -20,12 +20,8 @@ const spinAnimation = keyframes`
     }
 `;
 
-const StyledSpinner = styled(IconSpinner)<{ color: string }>`
+const StyledSpinner = styled(SpinnerIcon)`
   animation: ${spinAnimation} 1s ease infinite;
-
-  & > path {
-    stroke: ${({ color }) => color};
-  }
 `;
 
 export default Spinner;

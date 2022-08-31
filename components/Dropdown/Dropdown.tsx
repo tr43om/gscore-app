@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { Typography } from "../ui";
 import { useTheme } from "styled-components";
 import { useState } from "react";
-import ArrowIcon from "./assets/ArrowDown.svg";
-import SettingsIcon from "./assets/SettingsIcon.svg";
-import LogoutIcon from "./assets/LogoutIcon.svg";
+import { ArrowDownIcon, LogOutIcon, SettingsIcon } from "../../assets";
+
 import Link from "next/link";
 import { useAppDispatch } from "../../store/store";
 import { logOut } from "../../store/rootReducer";
@@ -41,7 +40,7 @@ const Dropdown = (props: DropdownProps) => {
           </Link>
           <Link href="/">
             <DropdownItem onClick={() => dispatch(logOut())}>
-              <LogoutIcon />
+              <LogOutIcon />
               <Typography
                 $variant={variants.textSingle300}
                 $fontFamily={fonts.thicccboi500}
@@ -89,7 +88,7 @@ const DropdownItem = styled.li`
   color: ${({ theme }) => theme.colors.neutral100};
 `;
 
-const ArrowIconStyled = styled(ArrowIcon)<{ isOpen: boolean }>`
+const ArrowIconStyled = styled(ArrowDownIcon)<{ isOpen: boolean }>`
   transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "")};
 `;
 

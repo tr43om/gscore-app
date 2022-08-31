@@ -1,5 +1,5 @@
-import { instance as axios } from "../../../services";
-import { setAccessToken } from "../../../store/rootReducer";
+import { instance as axios } from "../../services";
+import { setAccessToken } from "../../store/rootReducer";
 
 export const fetchLogIn = async ({
   email,

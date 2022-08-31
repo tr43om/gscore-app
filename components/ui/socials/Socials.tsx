@@ -1,21 +1,19 @@
 import styled from "styled-components";
 
 // icons
-import Twitter from "./assets/Twitter.svg";
-import Facebook from "./assets/Facebook.svg";
-import LinkedIn from "./assets/LinkedIn.svg";
+import { TwitterIcon, FacebookIcon, LinkedInIcon } from "../../../assets";
 
 const Socials = (props: SocialProps) => {
   return (
     <Icons>
       <Icon>
-        <Facebook />
+        <FacebookIcon />
       </Icon>
       <Icon>
-        <Twitter />
+        <TwitterIcon />
       </Icon>
       <Icon>
-        <LinkedIn />
+        <LinkedInIcon />
       </Icon>
     </Icons>
   );

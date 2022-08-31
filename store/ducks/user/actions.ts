@@ -5,7 +5,7 @@ import {
   fetchLogIn,
   fetchSignUp,
   fetchChangePersonalInfo,
-} from "../../../pages/api";
+} from "../../../api";
 
 export const login = createAsyncThunk("user/login", fetchLogIn);
 export const signup = createAsyncThunk("user/signup", fetchSignUp);

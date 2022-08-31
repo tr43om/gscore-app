@@ -11,6 +11,11 @@ const config: AxiosRequestConfig = {
 };
 
 export const instance = axios.create(config);
+
+// const setAccessToken = async (token: string) => instance.interceptors.request.use(() => {
+
+// })
+
 // instance.defaults.headers.common["Authorization"] = `Bearer ${
 //   store.getcaState().user.token
 // }`;

@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
-import SuccessIcon from "./assets/SuccessIcon.svg";
-import ErrorIcon from "./assets/ErrorIcon.svg";
+
+import { ErrorIcon, SuccessIcon } from "../../../../assets";
 
 const TextField = ({
   placeholder = "Placeholder",
