@@ -1,6 +1,6 @@
 export * from "./ducks";
 
 import { combineReducers } from "@reduxjs/toolkit";
-import { userReducer } from "./ducks";
+import { reducers } from "./ducks";
 
-export default combineReducers({ user: userReducer });
+export default combineReducers(reducers);
