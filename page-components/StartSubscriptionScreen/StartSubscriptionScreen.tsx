@@ -1,22 +1,14 @@
-import styled, { useTheme } from "styled-components";
-import { CheckoutCard, PrimaryButton, Typography } from "../../components";
+import styled from "styled-components";
+import { CheckoutCard, PrimaryButton } from "../../components";
 
 const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
-  const { typography } = useTheme();
-  const { fonts, variants } = typography;
   return (
     <Main>
-      <Typography
-        $variant={variants.specialHeading3}
-        $fontFamily={fonts.thicccboi700}
-        $mb="1rem"
-      >
-        Start your subscription
-      </Typography>
-      <Typography $variant={variants.paragraphSmall} $mb="3rem">
+      <Title mb={1}>Start your subscription</Title>
+      <Description mb={3}>
         We have sent you a payment receipt by e-mail and a link to download the
         plugin with a license key.
-      </Typography>
+      </Description>
       <CheckoutCard />
       <PrimaryButton $fullWidth $mt="3rem">
         Go to my subscriptions
@@ -31,6 +23,28 @@ const Main = styled.main`
   width: 100%;
   max-width: 38.75rem;
   margin: 0 auto;
+`;
+
+const Title = styled.h1<{ mb?: number }>`
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading3: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  margin-bottom: ${({ mb }) => `${mb}rem`};
+`;
+
+const Description = styled.p<{ mb?: number }>`
+  font: ${({
+    theme: {
+      variants: {
+        paragraphSmall: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  margin-bottom: ${({ mb }) => `${mb}rem`};
 `;
 
 export default StartSubscriptionScreen;

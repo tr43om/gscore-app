@@ -1,8 +1,13 @@
 import Head from "next/head";
 import styled from "styled-components";
 import { ProductsList } from "../../components";
+import { UsersService } from "../../generated";
 
 const HomeScreen = (props: HomeScreenProps) => {
+  (async () => {
+    const data = await UsersService.usersControllerGetMe();
+    console.log(data);
+  })();
   return (
     <>
       <Head>
