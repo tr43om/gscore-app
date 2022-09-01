@@ -9,6 +9,7 @@ import { selectUser } from "../../store/rootReducer";
 import { useAppDispatch } from "../../store/store";
 import { changePassword, changePersonalInfo } from "../../store/rootReducer";
 import { PersonalDataType, ChangePasswordType } from "../../types";
+import { withAuth } from "../../hocs/withAuth";
 
 const SettingsScreen = (props: SettingsScreenProps) => {
   const user = useSelector(selectUser);
@@ -141,4 +142,4 @@ const Form = styled.form`
   margin-bottom: 3rem;
 `;
 
-export default SettingsScreen;
+export default withAuth(SettingsScreen);

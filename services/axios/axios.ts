@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { store } from "../../store/store";
 import { getCookie } from "cookies-next";
+import { ACCESS_TOKEN } from "../../constants";
 
 const baseURL = "https://gscore-back.herokuapp.com/api";
 
@@ -14,7 +14,7 @@ const config: AxiosRequestConfig = {
 export const instance = axios.create(config);
 
 instance.interceptors.request.use((config) => {
-  const token = getCookie("accessToken");
+  const token = getCookie(ACCESS_TOKEN);
   if (token) config.headers = { Authorization: `Bearer ${token}` };
   return config;
 });

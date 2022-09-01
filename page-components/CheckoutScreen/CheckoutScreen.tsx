@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/rootReducer";
+import { withAuth } from "../../hocs/withAuth";
 
 const CheckoutScreen = () => {
   const user = useSelector(selectUser);
@@ -63,4 +64,4 @@ const TotalInfo = styled.p`
 `;
 const TotalTitle = styled.p``;
 const TotalPrice = styled.p``;
-export default CheckoutScreen;
+export default withAuth(CheckoutScreen);
