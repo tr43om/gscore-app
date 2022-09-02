@@ -1,7 +1,15 @@
+import { useSelector } from "react-redux";
 import styled, { useTheme } from "styled-components";
 import { CheckoutCard, PrimaryButton } from "../../components";
+import { selectProductById } from "../../store/ducks/products/selectors";
+import { getCurrentPaymentId } from "../../store/ducks/payment/selectors";
+import { PaymentReceipt } from "../../components";
 
 const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
+  const currentPaymentId = useSelector(getCurrentPaymentId);
+  const product = useSelector(selectProductById(currentPaymentId - 1));
+  console.log(product);
+
   return (
     <Main>
       <Title mb={1}>Start your subscription</Title>
@@ -9,7 +17,9 @@ const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
         We have sent you a payment receipt by e-mail and a link to download the
         plugin with a license key.
       </Description>
-      <CheckoutCard />
+
+      <PaymentReceipt product={product} />
+
       <PrimaryButton $fullWidth $mt="3rem">
         Go to my subscriptions
       </PrimaryButton>

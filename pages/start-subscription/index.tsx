@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { StartSubscriptionScreen } from "../../page-components";
 
-const StartSubscription = () => <StartSubscriptionScreen />;
+const StartSubscription: NextPage = () => <StartSubscriptionScreen />;
 
 export default StartSubscription;

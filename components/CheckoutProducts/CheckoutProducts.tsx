@@ -4,20 +4,32 @@ import { ShoppingBasketIcon } from "../../assets";
 import { ProductsType } from "../../types";
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "../ui/buttons";
+import { makePayment } from "../../store/ducks";
+import { getPaymentStatus } from "../../store/ducks";
+import { useSelector } from "react-redux";
+import { Error } from "../ui";
+import { useAppDispatch } from "../../store/store";
+import { useRouter } from "next/router";
 
 const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
-  const { register, handleSubmit, getValues, watch } = useForm({
+  const dispatch = useAppDispatch();
+  const { error, loading } = useSelector(getPaymentStatus);
+  const router = useRouter();
+
+  const { register, handleSubmit, watch, getValues } = useForm({
     defaultValues: {
       product: 1,
     },
     mode: "onChange",
   });
 
-  const productId = watch("product") - 1;
-  const productPrice = products[productId].prices[0].price;
+  const productId = watch("product");
+  const productPrice = products[productId - 1].prices[0].price;
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const { product } = data;
+    if (+product >= 1) dispatch(makePayment(+product));
+    router.push("/start-subscription");
   });
 
   return (
@@ -31,11 +43,11 @@ const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
           <Divider />
           {products &&
             products.map((product, i) => (
-              <Product key={product.id} active={i === productId}>
+              <Product key={product.id} active={i === productId - 1}>
                 <Package>{product.name}</Package>
                 <Price>
                   <span>{product.prices[0].price}$</span>
-                  <StyledBasketIcon active={i === productId} />
+                  <StyledBasketIcon active={i === productId - 1} />
                 </Price>
                 <Radio
                   type="radio"
@@ -50,8 +62,9 @@ const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
           <TotalTitle>Total: </TotalTitle>
           <TotalPrice>{productPrice}$</TotalPrice>
         </TotalInfo>
-        <PrimaryButton>Purchase</PrimaryButton>
+        <PrimaryButton isLoading={loading}>Purchase</PrimaryButton>
       </Form>
+      {error && <Error>{error.message}</Error>}
     </Root>
   );
 };
@@ -83,7 +96,7 @@ const Title = styled.h3`
   font-weight: 700;
 `;
 
-const Text = styled.p`
+const Content = styled.p`
   font: ${({
     theme: {
       variants: {
@@ -108,8 +121,8 @@ const Product = styled.label<{ active: boolean }>`
 const Radio = styled.input`
   display: none;
 `;
-const Package = styled(Text)``;
-const Price = styled(Text)`
+const Package = styled(Content)``;
+const Price = styled(Content)`
   display: flex;
   gap: 0.5rem;
   align-items: center;

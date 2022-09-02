@@ -2,6 +2,7 @@ import { InferGetServerSidePropsType, NextPage } from "next";
 import { CheckoutScreen } from "../../page-components/CheckoutScreen";
 import { GetServerSideProps } from "next";
 import { fetchGetProducts } from "../../api";
+import { store } from "../../store/store";
 
 const CheckoutPage: NextPage = ({
   products,
@@ -11,7 +12,7 @@ const CheckoutPage: NextPage = ({
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const products = await fetchGetProducts();
-
+  store.dispatch(fetchGetProducts);
   return { props: { products } };
 };
 

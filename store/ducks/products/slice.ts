@@ -4,11 +4,11 @@ import { ProductType } from "../../../types/index";
 import { getProducts } from "./actions";
 
 interface ProductsSliceState {
-  products: ProductType[] | null;
+  products: ProductType[];
 }
 
 const initialState: ProductsSliceState = {
-  products: null,
+  products: [],
 };
 
 export const { actions, reducer } = createSlice({

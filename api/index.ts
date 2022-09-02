@@ -6,3 +6,4 @@ export {
 } from "./users";
 
 export { fetchGetProducts } from "./products";
+export { fetchMakePayment } from "./payment";

@@ -1,5 +1,5 @@
 import { instance as axios } from "../../services";
-import { setAccessToken } from "../../store/rootReducer";
+
 import { setCookie } from "cookies-next";
 
 export const fetchLogIn = async ({
