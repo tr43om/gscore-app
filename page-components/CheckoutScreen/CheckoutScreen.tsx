@@ -10,13 +10,10 @@ const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
       <Title mb={2}>Checkout</Title>
 
       <CheckoutCard products={products} />
-      <TotalInfo>
-        <TotalTitle>Total: </TotalTitle>
-        <TotalPrice>$77</TotalPrice>
-      </TotalInfo>
-      <Link href="/start-subscription">
+
+      {/* <Link href="/start-subscription">
         <PrimaryButton>Purchase</PrimaryButton>
-      </Link>
+      </Link> */}
     </Main>
   );
 };
@@ -42,18 +39,4 @@ const Title = styled.h1<{ mb?: number }>`
   margin-bottom: ${({ mb }) => `${mb}rem`};
 `;
 
-const TotalInfo = styled.p`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-  font: ${({
-    theme: {
-      variants: {
-        specialHeading4: { lineHeight, fontFamily, fontSize },
-      },
-    },
-  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
-`;
-const TotalTitle = styled.p``;
-const TotalPrice = styled.p``;
 export default CheckoutScreen;

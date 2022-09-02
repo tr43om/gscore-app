@@ -20,6 +20,6 @@ export const { actions, reducer } = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const { addToCard } = actions;
+export const {} = actions;
 
 export const cartReducer = reducer;
