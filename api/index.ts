@@ -4,3 +4,5 @@ export {
   fetchSignUp,
   fetchChangePersonalInfo,
 } from "./users";
+
+export { fetchGetProducts } from "./products";

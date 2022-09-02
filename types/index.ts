@@ -32,3 +32,19 @@ export type ChangePasswordType = {
   currentPassword: string;
   newPassword: string;
 };
+
+export type PriceType = {
+  id: number;
+  isActive: boolean;
+  productId: number;
+  price: string;
+};
+
+export type ProductType = {
+  id: number;
+  sitesCount: number;
+  name: string;
+  prices: PriceType[];
+};
+
+export type ProductsType = Array<ProductType>;

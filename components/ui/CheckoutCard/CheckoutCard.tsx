@@ -1,22 +1,28 @@
 import { Divider } from "../Divider";
 import styled from "styled-components";
 import { ShoppingBasketIcon } from "../../../assets";
+import { ProductsType } from "../../../types";
 
 const CheckoutCard = (props: CheckoutCardProps) => {
   return (
     <Root>
-      <CheckoutCardHeader>
-        <CheckoutCardTitle>Package name</CheckoutCardTitle>
-        <CheckoutCardTitle>Price</CheckoutCardTitle>
-      </CheckoutCardHeader>
+      <Header>
+        <Title>Package name</Title>
+        <Title>Price</Title>
+      </Header>
       <Divider />
-      <CheckoutCardBody>
-        <CheckoutCardPackage>Single site license</CheckoutCardPackage>
-        <CheckoutCardPrice>
-          <span>$77</span>
-          <ShoppingBasketIcon />
-        </CheckoutCardPrice>
-      </CheckoutCardBody>
+      <Body>
+        {props.products &&
+          props.products.map((product) => (
+            <Product key={product.id}>
+              <Package>{product.name}</Package>
+              <Price>
+                <span>{product.prices[0].price}$</span>
+                <ShoppingBasketIcon />
+              </Price>
+            </Product>
+          ))}
+      </Body>
     </Root>
   );
 };
@@ -27,20 +33,15 @@ const Root = styled.section`
   margin-bottom: 1.5rem;
 `;
 
-const CheckoutCardHeader = styled.div`
+const Header = styled.div`
   display: flex;
   justify-content: space-between;
 
   padding: 3rem 4.5rem 2rem 3rem;
 `;
-const CheckoutCardBody = styled.div`
-  display: flex;
-  justify-content: space-between;
+const Body = styled.div``;
 
-  padding: 2rem 3rem 3rem 3rem;
-`;
-
-const CheckoutCardTitle = styled.h3`
+const Title = styled.h3`
   font: ${({
     theme: {
       variants: {
@@ -51,7 +52,7 @@ const CheckoutCardTitle = styled.h3`
   font-weight: 700;
 `;
 
-const CheckoutCardText = styled.p`
+const Text = styled.p`
   font: ${({
     theme: {
       variants: {
@@ -60,14 +61,21 @@ const CheckoutCardText = styled.p`
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
+const Product = styled.div`
+  display: flex;
+  justify-content: space-between;
 
-const CheckoutCardPackage = styled(CheckoutCardText)``;
-const CheckoutCardPrice = styled(CheckoutCardText)`
+  padding: 2rem 3rem 3rem 3rem;
+`;
+const Package = styled(Text)``;
+const Price = styled(Text)`
   display: flex;
   gap: 0.5rem;
   align-items: center;
 `;
 
-type CheckoutCardProps = {};
+type CheckoutCardProps = {
+  products?: ProductsType;
+};
 
 export default CheckoutCard;

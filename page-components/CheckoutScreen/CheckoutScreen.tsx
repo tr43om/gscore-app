@@ -1,26 +1,15 @@
 import styled from "styled-components";
 import { PrimaryButton, Stepper, CheckoutCard } from "../../components";
-
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../store/rootReducer";
+import { ProductsType } from "../../types/index";
 
-const CheckoutScreen = () => {
-  const user = useSelector(selectUser);
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   if (!user?.isAuthorized) router.push("/signup");
-  // }, [router, user]);
-
+const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
   return (
     <Main>
       <Stepper $step={3} $mb="4rem" />
       <Title mb={2}>Checkout</Title>
 
-      <CheckoutCard />
+      <CheckoutCard products={products} />
       <TotalInfo>
         <TotalTitle>Total: </TotalTitle>
         <TotalPrice>$77</TotalPrice>
@@ -30,6 +19,10 @@ const CheckoutScreen = () => {
       </Link>
     </Main>
   );
+};
+
+type CheckoutScreenProps = {
+  products: ProductsType;
 };
 
 const Main = styled.main`
