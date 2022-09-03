@@ -16,7 +16,7 @@ const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
   const { error, loading } = useSelector(getPaymentStatus);
   const router = useRouter();
 
-  const { register, handleSubmit, watch, getValues } = useForm({
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: {
       product: 1,
     },
@@ -28,7 +28,7 @@ const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
 
   const onSubmit = handleSubmit((data) => {
     const { product } = data;
-    if (+product >= 1) dispatch(makePayment(+product));
+    dispatch(makePayment(+product));
     router.push("/start-subscription");
   });
 

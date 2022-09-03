@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { SerializedError } from "@reduxjs/toolkit";
 import { makePayment } from "./actions";
-import { number } from "yup";
 
 interface PaymentSliceState {
   loading: boolean;

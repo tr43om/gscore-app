@@ -11,7 +11,6 @@ export const fetchLogIn = async ({
 }) => {
   const { data } = await axios.post("users/sign-in", { email, password });
   setCookie("accessToken", data.token);
-  console.log(data.token);
   return data;
 };
 
