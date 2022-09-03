@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { PrimaryButton, Stepper, CheckoutCard } from "../../components";
-import Link from "next/link";
-import { ProductsType } from "../../types/index";
+
+import { withAuth } from "../../hocs/withAuth";
+import { ProductsType } from "../../types";
 
 const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
   return (
@@ -10,10 +11,6 @@ const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
       <Title mb={2}>Checkout</Title>
 
       <CheckoutCard products={products} />
-
-      {/* <Link href="/start-subscription">
-        <PrimaryButton>Purchase</PrimaryButton>
-      </Link> */}
     </Main>
   );
 };
@@ -39,4 +36,4 @@ const Title = styled.h1<{ mb?: number }>`
   margin-bottom: ${({ mb }) => `${mb}rem`};
 `;
 
-export default CheckoutScreen;
+export default withAuth(CheckoutScreen);

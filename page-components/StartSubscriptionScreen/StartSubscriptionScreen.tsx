@@ -4,12 +4,12 @@ import { CheckoutCard, PrimaryButton } from "../../components";
 import { selectProductById } from "../../store/ducks/products/selectors";
 import { getCurrentPaymentId } from "../../store/ducks/payment/selectors";
 import { PaymentReceipt } from "../../components";
+import { withAuth } from "../../hocs/withAuth";
 
 const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
   const currentPaymentId = useSelector(getCurrentPaymentId);
   const product = useSelector(selectProductById(currentPaymentId - 1));
   console.log(product);
-
   return (
     <Main>
       <Title mb={1}>Start your subscription</Title>
@@ -57,4 +57,4 @@ const Description = styled.p<{ mb?: number }>`
   margin-bottom: ${({ mb }) => `${mb}rem`};
 `;
 
-export default StartSubscriptionScreen;
+export default withAuth(StartSubscriptionScreen);
