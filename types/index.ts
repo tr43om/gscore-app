@@ -1,50 +1,12 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+export type { User } from "./models/User";
 
-export type variantType = {
-  fontSize: string;
-  lineHeight: string;
-};
+// Responses types
+export type { UserResponseDto } from "./models/UserResponseDto"; // api/users/me
+export type { UpdatePasswordDto } from "./models/UpdatePasswordDto"; // api/users/update-password
+export type { ChangePersonalDataDto } from "./models/ChangePersonalDataDto"; // api/users
+export type { SignInDto } from "./models/SignInDto"; // api/users/sign-in
+export type { SignUpDto } from "./models/SignUpDto"; // api/users/sign-up
 
-export type User = {
-  email: string;
-  username: string;
-  id: string;
-  token: string;
-};
+export type { ProductResponseDto } from "./models/ProductResponseDto"; //api/products
 
-export type SignInValues = {
-  email: string;
-  password: string;
-};
-
-export type SignUpValues = {
-  username: string;
-  email: string;
-  password: string;
-};
-
-export type PersonalDataType = {
-  email: string;
-  username: string;
-};
-
-export type ChangePasswordType = {
-  currentPassword: string;
-  newPassword: string;
-};
-
-export type PriceType = {
-  id: number;
-  isActive: boolean;
-  productId: number;
-  price: string;
-};
-
-export type ProductType = {
-  id: number;
-  sitesCount: number;
-  name: string;
-  prices: PriceType[];
-};
-
-export type ProductsType = Array<ProductType>;
+export type { SubscribeResponseDto } from "./models/SubscribeResponseDto"; //api/subscribe/self

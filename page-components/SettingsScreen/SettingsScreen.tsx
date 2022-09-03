@@ -8,8 +8,8 @@ import { selectUser } from "../../store/rootReducer";
 
 import { useAppDispatch } from "../../store/store";
 import { changePassword, changePersonalInfo } from "../../store/ducks/user";
-import { PersonalDataType, ChangePasswordType } from "../../types";
 import { withAuth } from "../../hocs/withAuth";
+import { UpdatePasswordDto, ChangePersonalDataDto } from "../../types";
 
 const SettingsScreen = (props: SettingsScreenProps) => {
   const user = useSelector(selectUser);
@@ -20,7 +20,7 @@ const SettingsScreen = (props: SettingsScreenProps) => {
     handleSubmit: handlePersonalInfoSubmit,
     control: personalInfoControl,
     formState: { isSubmitSuccessful: isChangePersonalDataSuccessful },
-  } = useForm<PersonalDataType>({
+  } = useForm<ChangePersonalDataDto>({
     defaultValues: {
       username: "",
       email: "",
@@ -38,7 +38,7 @@ const SettingsScreen = (props: SettingsScreenProps) => {
   const {
     handleSubmit: handleChangePasswordSubmit,
     control: changePasswordControl,
-  } = useForm<ChangePasswordType>({
+  } = useForm<UpdatePasswordDto>({
     defaultValues: {
       currentPassword: "",
       newPassword: "",

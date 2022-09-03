@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { SerializedError } from "@reduxjs/toolkit";
-import { ProductType } from "../../../types/index";
 import { getSubscriptions } from "./actions";
+import { SubscribeResponseDto } from "../../../types";
 
 interface SubscriptionsSliceState {
-  subscriptions: ProductType[];
+  subscriptions: SubscribeResponseDto[];
   loading: boolean;
   error: SerializedError | null;
 }

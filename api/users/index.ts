@@ -1,28 +1,20 @@
 import { instance as axios } from "../../services";
 import { ACCESS_TOKEN } from "../../constants";
 import { setCookie } from "cookies-next";
+import {
+  SignInDto,
+  SignUpDto,
+  UpdatePasswordDto,
+  ChangePersonalDataDto,
+} from "../../types";
 
-export const fetchLogIn = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) => {
+export const fetchLogIn = async ({ email, password }: SignInDto) => {
   const { data } = await axios.post("users/sign-in", { email, password });
   setCookie(ACCESS_TOKEN, data.token);
   return data;
 };
 
-export const fetchSignUp = async ({
-  username,
-  email,
-  password,
-}: {
-  username: string;
-  email: string;
-  password: string;
-}) => {
+export const fetchSignUp = async ({ username, email, password }: SignUpDto) => {
   const { data } = await axios.post("users/sign-up", {
     email,
     username,
@@ -35,14 +27,14 @@ export const fetchSignUp = async ({
 export const fetchChangePassword = async ({
   currentPassword,
   newPassword,
-}: {
-  currentPassword: string;
-  newPassword: string;
-}) => {
-  const { data } = await axios.patch("users/update-password", {
-    currentPassword,
-    newPassword,
-  });
+}: UpdatePasswordDto) => {
+  const { data } = await axios.patch<UpdatePasswordDto>(
+    "users/update-password",
+    {
+      currentPassword,
+      newPassword,
+    }
+  );
 
   return data;
 };
@@ -50,11 +42,8 @@ export const fetchChangePassword = async ({
 export const fetchChangePersonalInfo = async ({
   email,
   username,
-}: {
-  email: string;
-  username: string;
-}) => {
-  const { data } = await axios.patch("users", {
+}: ChangePersonalDataDto) => {
+  const { data } = await axios.patch<ChangePersonalDataDto>("users", {
     email,
     username,
   });

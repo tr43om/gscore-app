@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Divider } from "../ui";
-import { ProductType } from "../../types/index";
+import { ProductResponseDto } from "../../types";
 
 const PaymentReceipt = ({ product }: PaymentReceiptProps) => {
   return (
@@ -21,7 +21,7 @@ const PaymentReceipt = ({ product }: PaymentReceiptProps) => {
 };
 
 type PaymentReceiptProps = {
-  product: ProductType;
+  product: ProductResponseDto;
 };
 
 const Header = styled.header`
