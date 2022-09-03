@@ -48,3 +48,13 @@ export type ProductType = {
 };
 
 export type ProductsType = Array<ProductType>;
+
+export type SubscriptionCardType = {
+  id: number;
+  userId: number;
+  productId: number;
+  product: ProductType;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  status: string;
+};

@@ -5,4 +5,5 @@ export * from "./Product";
 export * from "./ProductsList";
 export * from "./PaymentReceipt";
 export * from "./CheckoutProducts";
+export * from "./SubscriptionCard";
 export * from "./ui";
