@@ -79,6 +79,12 @@ const variants = {
     fontFamily: fonts.thicccboi700,
   },
 
+  textSingle400Regular: {
+    fontSize: "1.5rem", //24px
+    lineHeight: "26px",
+    fontFamily: fonts.default,
+  },
+
   textSingle300: {
     fontSize: "1.25rem", //20px
     lineHeight: "22px",
@@ -94,6 +100,18 @@ const variants = {
   textSingle100: {
     fontSize: "1rem", // 16px
     lineHeight: "18px",
+    fontFamily: fonts.thicccboi700,
+  },
+
+  textSingle100Regular: {
+    fontSize: "1rem", // 16px
+    lineHeight: "18px",
+    fontFamily: fonts.default,
+  },
+
+  typography4: {
+    fontSize: "1.375rem", // 22px
+    lineHeight: "28px",
     fontFamily: fonts.thicccboi700,
   },
 };
