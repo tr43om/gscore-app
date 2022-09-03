@@ -1,5 +1,5 @@
 import { instance as axios } from "../../services";
-
+import { ACCESS_TOKEN } from "../../constants";
 import { setCookie } from "cookies-next";
 
 export const fetchLogIn = async ({
@@ -10,7 +10,7 @@ export const fetchLogIn = async ({
   password: string;
 }) => {
   const { data } = await axios.post("users/sign-in", { email, password });
-  setCookie("accessToken", data.token);
+  setCookie(ACCESS_TOKEN, data.token);
   return data;
 };
 

@@ -13,10 +13,10 @@ export const withoutAuth: withAuthType = (Component) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (!token) router.push("/subscriptions");
+      if (token) router.push("/subscriptions");
     }, [router, token]);
 
-    return token ? <Component {...props} /> : <Spinner />;
+    return !token ? <Component {...props} /> : <Spinner />;
   };
 
   return Wrapper;

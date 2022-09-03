@@ -14,7 +14,7 @@ export const withAuth = <P extends object>(Component: FC<P>) => {
       if (!token) router.push("/signin");
     }, [router, token]);
 
-    return token ? <Component {...(props as P)} /> : <Spinner />;
+    return token ? <Component {...props} /> : <Spinner />;
   };
 
   return Wrapper;

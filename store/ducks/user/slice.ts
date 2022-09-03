@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import { login, signup, changePassword, changePersonalInfo } from "./actions";
-// import { setToken } from "../../../services";
 import { User } from "../../../types/index";
+import { deleteCookie } from "cookies-next";
+import { ACCESS_TOKEN } from "../../../constants";
 
 interface UserSliceState {
   loading: boolean;
   isAuthorized: boolean | null;
   userInfo: User | null;
-  token: string | null;
   error: SerializedError | null;
 }
 
@@ -17,7 +17,6 @@ const initialState: UserSliceState = {
   isAuthorized: null,
   error: null,
   userInfo: null,
-  token: null,
 };
 
 export const { actions, reducer } = createSlice({
@@ -29,10 +28,7 @@ export const { actions, reducer } = createSlice({
       state.isAuthorized = false;
       state.error = null;
       state.userInfo = null;
-      state.token = null;
-    },
-    setAccessToken: (state, { payload }) => {
-      state.token = payload;
+      deleteCookie(ACCESS_TOKEN);
     },
   },
   extraReducers: (builder) => {
@@ -102,6 +98,6 @@ export const { actions, reducer } = createSlice({
   },
 });
 
-export const { logOut, setAccessToken } = actions;
+export const { logOut } = actions;
 
 export const userReducer = reducer;

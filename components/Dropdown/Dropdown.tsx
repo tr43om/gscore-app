@@ -4,7 +4,7 @@ import { ArrowDownIcon, LogOutIcon, SettingsIcon } from "../../assets";
 
 import Link from "next/link";
 import { useAppDispatch } from "../../store/store";
-import { logOut } from "../../store/rootReducer";
+import { logOut } from "../../store/ducks/user";
 
 const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
