@@ -14,6 +14,7 @@ import { SignInValues } from "../../types";
 
 // components
 import { Stepper, PrimaryButton, FormInput, Error } from "../../components";
+import { withoutAuth } from "../../hocs/withoutAuth";
 
 const SignInScreen = (props: SignInScreenProps) => {
   const dispatch = useAppDispatch();
@@ -90,4 +91,4 @@ const Form = styled.form`
 
 type SignInScreenProps = {};
 
-export default SignInScreen;
+export default withoutAuth(SignInScreen);

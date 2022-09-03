@@ -11,6 +11,7 @@ import { selectUser } from "../../store/rootReducer";
 import { useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
 import { SignUpValues } from "../../types";
+import { withoutAuth } from "../../hocs/withoutAuth";
 
 const SignUpScreen = (props: SignUpScreenProps) => {
   const dispatch = useAppDispatch();
@@ -126,4 +127,4 @@ const NextStepLink = styled.span`
 
 type SignUpScreenProps = {};
 
-export default SignUpScreen;
+export default withoutAuth(SignUpScreen);
