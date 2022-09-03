@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/rootReducer";
 import { Dropdown } from "../../Dropdown";
+import { useRouter } from "next/router";
 
 const Header = (props: HeaderProps) => {
-  const user = useSelector(selectUser);
+  const { isAuthorized, userInfo } = useSelector(selectUser);
+  const { pathname } = useRouter();
 
   return (
     <HeaderContainer>
@@ -20,14 +22,16 @@ const Header = (props: HeaderProps) => {
         />
       </Link>
 
-      {user?.userInfo && (
-        <Navigation>
-          <Link href="/">
-            <StyledLink>My subscriptions</StyledLink>
-          </Link>
-          <Dropdown label={user.userInfo?.username} />
-        </Navigation>
-      )}
+      {isAuthorized &&
+        pathname !== "/start-subscription" &&
+        pathname !== "/checkout" && (
+          <Navigation>
+            <Link href="/">
+              <StyledLink>My subscriptions</StyledLink>
+            </Link>
+            <Dropdown label={userInfo?.username || ""} />
+          </Navigation>
+        )}
     </HeaderContainer>
   );
 };

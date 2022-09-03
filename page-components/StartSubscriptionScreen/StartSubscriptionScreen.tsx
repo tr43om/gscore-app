@@ -1,15 +1,25 @@
 import { useSelector } from "react-redux";
 import styled, { useTheme } from "styled-components";
-import { CheckoutCard, PrimaryButton } from "../../components";
+import { Error, PrimaryButton } from "../../components";
 import { selectProductById } from "../../store/ducks/products/selectors";
 import { getCurrentPaymentId } from "../../store/ducks/payment/selectors";
 import { PaymentReceipt } from "../../components";
 import { withAuth } from "../../hocs/withAuth";
+import { getSubscriptions } from "../../store/ducks";
+import { selectSubscriptionsSlice } from "../../store/ducks";
+import { useAppDispatch } from "../../store/store";
 
 const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
   const currentPaymentId = useSelector(getCurrentPaymentId);
   const product = useSelector(selectProductById(currentPaymentId - 1));
-  console.log(product);
+  const { loading, error, subscriptions } = useSelector(
+    selectSubscriptionsSlice
+  );
+  const dispatch = useAppDispatch();
+
+  const storeSubscriptions = async () => {
+    await dispatch(getSubscriptions());
+  };
   return (
     <Main>
       <Title mb={1}>Start your subscription</Title>
@@ -20,9 +30,15 @@ const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
 
       <PaymentReceipt product={product} />
 
-      <PrimaryButton $fullWidth $mt="3rem">
+      <PrimaryButton
+        $fullWidth
+        $mt="3rem"
+        onClick={storeSubscriptions}
+        isLoading={loading}
+      >
         Go to my subscriptions
       </PrimaryButton>
+      {error && <Error>{error.message} </Error>}
     </Main>
   );
 };
