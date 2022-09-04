@@ -1,4 +1,6 @@
 export type { User } from "./models/User";
+export type { LicenseCode } from "./models/LicenseCode";
+export type { LicenceCodeResponseDto } from "./models/LicenceCodeResponseDto";
 
 // Responses types
 export type { UserResponseDto } from "./models/UserResponseDto"; // api/users/me

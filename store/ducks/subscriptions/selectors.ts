@@ -6,7 +6,7 @@ export const selectSubscriptionsSlice = createSelector(
   (subscriptions) => subscriptions
 );
 
-export const selectSubscriptionInfo = createSelector(
-  ({ subscriptions: { subscriptions } }: RootState) => subscriptions,
-  (subscriptions) => subscriptions
+export const selectCodes = createSelector(
+  ({ subscriptions: { currentCodes } }: RootState) => currentCodes,
+  (currentCodes) => currentCodes
 );

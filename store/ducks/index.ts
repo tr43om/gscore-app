@@ -15,9 +15,9 @@ export const reducers = {
 export { selectUser } from "./user";
 export { getPaymentStatus } from "./payment";
 export { selectProducts, selectProductById } from "./products";
-export { selectSubscriptionsSlice } from "./subscriptions";
+export { selectSubscriptionsSlice, selectCodes } from "./subscriptions";
 
 // actions
 export { login, signup } from "./user";
 export { makePayment } from "./payment";
-export { getSubscriptions } from "./subscriptions";
+export { getSubscriptions, showCurrentCodes } from "./subscriptions";

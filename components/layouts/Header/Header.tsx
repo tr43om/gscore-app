@@ -26,7 +26,7 @@ const Header = (props: HeaderProps) => {
         pathname !== "/start-subscription" &&
         pathname !== "/checkout" && (
           <Navigation>
-            <Link href="/">
+            <Link href="/subscriptions">
               <StyledLink>My subscriptions</StyledLink>
             </Link>
             <Dropdown label={userInfo?.username || ""} />

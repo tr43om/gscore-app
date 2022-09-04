@@ -1,32 +1,55 @@
 import styled from "styled-components";
 import { Divider, SecondaryButton } from "../ui";
-import { SubscriptionCardType } from "../../types/index";
+import { SubscribeResponseDto } from "../../types";
+import { useAppDispatch } from "../../store/store";
+import { showCurrentCodes } from "../../store/ducks";
 
 const SubscriptionCard = ({ subscription }: SubscriptionCardProps) => {
+  const {
+    product: { prices, name },
+    id,
+  } = subscription;
+  const status =
+    subscription.status.charAt(0) +
+    subscription.status.substring(1).toLowerCase();
+  const validDate = new Date(
+    +subscription.currentPeriodEnd * 1000
+  ).toDateString();
+  const price = prices[0].price;
+
+  const dispatch = useAppDispatch();
+
   return (
     <Root>
       <Header>
         <p>Gscore</p>
-        <Status>Active</Status>
+        <Status isActive={status === "Active"}>{status}</Status>
       </Header>
       <Divider />
       <Body>
         <Content>
           <div>
-            <Package>Single site</Package>
-            <ValidUntil>valid until 2023</ValidUntil>
+            <Package>{name} license</Package>
+            <ValidUntil>valid until {validDate}</ValidUntil>
           </div>
-          <Price>$77</Price>
+          <Price>${price}</Price>
         </Content>
 
-        <SecondaryButton>View</SecondaryButton>
+        <SecondaryButton
+          onClick={() => {
+            console.log(id);
+            dispatch(showCurrentCodes(id));
+          }}
+        >
+          View
+        </SecondaryButton>
       </Body>
     </Root>
   );
 };
 
 type SubscriptionCardProps = {
-  subscription: SubscriptionCardType;
+  subscription: SubscribeResponseDto;
 };
 
 const Root = styled.section`
@@ -49,7 +72,10 @@ const Header = styled.header`
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
-const Status = styled.p``;
+const Status = styled.p<{ isActive: boolean }>`
+  color: ${({ isActive, theme: { colors } }) =>
+    isActive ? colors.systemGreen : colors.systemRed300};
+`;
 
 const Body = styled.main`
   padding: 1rem 5rem 3rem 2rem;

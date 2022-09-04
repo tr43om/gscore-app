@@ -1,16 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { SerializedError } from "@reduxjs/toolkit";
 import { getSubscriptions } from "./actions";
-import { SubscribeResponseDto } from "../../../types";
+import { SubscribeResponseDto, LicenceCodeResponseDto } from "../../../types";
 
 interface SubscriptionsSliceState {
   subscriptions: SubscribeResponseDto[];
   loading: boolean;
   error: SerializedError | null;
+  currentCodes: LicenceCodeResponseDto[];
 }
 
 const initialState: SubscriptionsSliceState = {
   subscriptions: [],
+  currentCodes: [],
   error: null,
   loading: false,
 };
@@ -18,7 +20,13 @@ const initialState: SubscriptionsSliceState = {
 export const { actions, reducer } = createSlice({
   name: "subscriptions",
   initialState,
-  reducers: {},
+  reducers: {
+    showCurrentCodes: (state, action: PayloadAction<number>) => {
+      state.currentCodes =
+        state.subscriptions.find((sub) => sub.id === action.payload)?.codes ||
+        [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getSubscriptions.fulfilled, (state, { payload }) => {
       state.subscriptions = payload;
@@ -36,6 +44,6 @@ export const { actions, reducer } = createSlice({
   },
 });
 
-export const {} = actions;
+export const { showCurrentCodes } = actions;
 
 export const subscriptionsReducer = reducer;
