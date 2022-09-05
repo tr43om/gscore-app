@@ -1,22 +1,31 @@
 import styled from "styled-components";
-import { SubscriptionCard } from "../../components";
+import {
+  PrimaryButton,
+  SubscriptionCard,
+  SubscriptionsList,
+} from "../../components";
 import { withAuth } from "../../hocs/withAuth";
 import { useSelector } from "react-redux";
 import { selectSubscriptionsSlice } from "../../store/ducks";
 import { selectCodes } from "../../store/ducks";
+
 import _ from "lodash";
+import { useSwiper } from "swiper/react";
 
 const SubscriptionsScreen = (props: SubscriptionsScreenProps) => {
   const { subscriptions } = useSelector(selectSubscriptionsSlice);
   const codes = useSelector(selectCodes);
-  console.log(subscriptions);
-  console.log("codes", codes);
+
+  const swiper = useSwiper();
+
   return (
     <Root>
-      <Title mb={3}>My subscriptions</Title>
-      {_.take(subscriptions, 3).map((subscription) => (
-        <SubscriptionCard subscription={subscription} key={subscription.id} />
-      ))}
+      <Header>
+        <Title>My subscriptions</Title>
+        <StyledPrimaryButton>Upgrade</StyledPrimaryButton>
+      </Header>
+
+      <SubscriptionsList subscriptions={subscriptions} />
 
       {codes.map((code) => (
         <div key={code.id}>{code.code}</div>
@@ -38,6 +47,18 @@ const Title = styled.h3<{ mb?: number }>`
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
   margin-bottom: ${({ mb }) => `${mb}rem`};
+`;
+
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+`;
+
+const StyledPrimaryButton = styled(PrimaryButton)`
+  max-width: 150px;
+  padding-block: 26px;
 `;
 
 export default withAuth(SubscriptionsScreen);

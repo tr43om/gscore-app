@@ -4,7 +4,10 @@ import { SubscribeResponseDto } from "../../types";
 import { useAppDispatch } from "../../store/store";
 import { showCurrentCodes } from "../../store/ducks";
 
-const SubscriptionCard = ({ subscription }: SubscriptionCardProps) => {
+const SubscriptionCard = ({
+  subscription,
+  $isActive,
+}: SubscriptionCardProps) => {
   const {
     product: { prices, name },
     id,
@@ -20,7 +23,7 @@ const SubscriptionCard = ({ subscription }: SubscriptionCardProps) => {
   const dispatch = useAppDispatch();
 
   return (
-    <Root>
+    <Root isActive={$isActive}>
       <Header>
         <p>Gscore</p>
         <Status isActive={status === "Active"}>{status}</Status>
@@ -35,14 +38,13 @@ const SubscriptionCard = ({ subscription }: SubscriptionCardProps) => {
           <Price>${price}</Price>
         </Content>
 
-        <SecondaryButton
+        <StyledSecondaryButton
           onClick={() => {
-            console.log(id);
             dispatch(showCurrentCodes(id));
           }}
         >
           View
-        </SecondaryButton>
+        </StyledSecondaryButton>
       </Body>
     </Root>
   );
@@ -50,10 +52,12 @@ const SubscriptionCard = ({ subscription }: SubscriptionCardProps) => {
 
 type SubscriptionCardProps = {
   subscription: SubscribeResponseDto;
+  $isActive: boolean;
 };
 
-const Root = styled.section`
+const Root = styled.section<{ isActive: boolean }>`
   background-color: ${({ theme: { colors } }) => colors.neutral600};
+  opacity: ${({ isActive }) => !isActive && 0.6};
   border-radius: 12px;
   max-width: 38.75rem;
 `;
@@ -78,7 +82,7 @@ const Status = styled.p<{ isActive: boolean }>`
 `;
 
 const Body = styled.main`
-  padding: 1rem 5rem 3rem 2rem;
+  padding: 2rem 5.5rem 3rem 2rem;
 `;
 
 const Content = styled.div`
@@ -109,6 +113,10 @@ const ValidUntil = styled.p`
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
   padding-top: 0.8rem;
+`;
+
+const StyledSecondaryButton = styled(SecondaryButton)`
+  max-width: 120px;
 `;
 
 export default SubscriptionCard;

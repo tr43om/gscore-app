@@ -18,7 +18,7 @@ html, body {
       },
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
-  
+  overflow-x: hidden;
   height: 100%;
 }
 

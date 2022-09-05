@@ -10,6 +10,7 @@ const PrimaryButton = ({
   $fullWidth = false,
   $mb,
   $mt,
+  className,
 }: IButtonProps) => {
   return (
     <Root
@@ -18,6 +19,7 @@ const PrimaryButton = ({
       fullWidth={$fullWidth}
       mb={$mb || ""}
       mt={$mt || ""}
+      className={className}
     >
       {!isLoading ? children : <Spinner />}
     </Root>
