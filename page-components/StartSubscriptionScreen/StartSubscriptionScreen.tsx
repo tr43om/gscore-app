@@ -5,20 +5,19 @@ import { selectProductById } from "../../store/ducks/products/selectors";
 import { getCurrentPaymentId } from "../../store/ducks/payment/selectors";
 import { PaymentReceipt } from "../../components";
 import { withAuth } from "../../hocs/withAuth";
-import { getSubscriptions } from "../../store/ducks";
+import { getSubscriptions, getCodes } from "../../store/ducks";
 import { selectSubscriptionsSlice } from "../../store/ducks";
 import { useAppDispatch } from "../../store/store";
 
 const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
   const currentPaymentId = useSelector(getCurrentPaymentId);
   const product = useSelector(selectProductById(currentPaymentId - 1));
-  const { loading, error, subscriptions } = useSelector(
-    selectSubscriptionsSlice
-  );
+  const { loading, error } = useSelector(selectSubscriptionsSlice);
   const dispatch = useAppDispatch();
 
   const storeSubscriptions = async () => {
     await dispatch(getSubscriptions());
+    await dispatch(getCodes());
   };
   return (
     <Main>

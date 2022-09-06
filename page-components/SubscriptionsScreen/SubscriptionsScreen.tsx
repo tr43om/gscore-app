@@ -1,22 +1,26 @@
 import styled from "styled-components";
 import {
+  LicenseCodeCard,
   PrimaryButton,
-  SubscriptionCard,
   SubscriptionsList,
 } from "../../components";
 import { withAuth } from "../../hocs/withAuth";
 import { useSelector } from "react-redux";
 import { selectSubscriptionsSlice } from "../../store/ducks";
-import { selectCodes } from "../../store/ducks";
 
-import _ from "lodash";
-import { useSwiper } from "swiper/react";
+import {
+  selectCodesById,
+  selectDisplayedSubscriptionId,
+} from "../../store/ducks";
+
+import { RootState } from "../../store/store";
 
 const SubscriptionsScreen = (props: SubscriptionsScreenProps) => {
   const { subscriptions } = useSelector(selectSubscriptionsSlice);
-  const codes = useSelector(selectCodes);
-
-  const swiper = useSwiper();
+  const displayedSubscriptionId = useSelector(selectDisplayedSubscriptionId);
+  const codes = useSelector((state: RootState) =>
+    selectCodesById(state, displayedSubscriptionId)
+  );
 
   return (
     <Root>
@@ -27,9 +31,11 @@ const SubscriptionsScreen = (props: SubscriptionsScreenProps) => {
 
       <SubscriptionsList subscriptions={subscriptions} />
 
-      {codes.map((code) => (
-        <div key={code.id}>{code.code}</div>
-      ))}
+      <LicenseCodesList>
+        {codes.map((code) => (
+          <LicenseCodeCard key={code.id} code={code} />
+        ))}
+      </LicenseCodesList>
     </Root>
   );
 };
@@ -59,6 +65,11 @@ const Header = styled.header`
 const StyledPrimaryButton = styled(PrimaryButton)`
   max-width: 150px;
   padding-block: 26px;
+`;
+
+const LicenseCodesList = styled.section`
+  display: grid;
+  gap: 1rem;
 `;
 
 export default withAuth(SubscriptionsScreen);

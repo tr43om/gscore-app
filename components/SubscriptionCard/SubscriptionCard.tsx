@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Divider, SecondaryButton } from "../ui";
 import { SubscribeResponseDto } from "../../types";
 import { useAppDispatch } from "../../store/store";
-import { showCurrentCodes } from "../../store/ducks";
+import { setDisplayedSubscriptionId } from "../../store/ducks";
 
 const SubscriptionCard = ({
   subscription,
@@ -40,7 +40,7 @@ const SubscriptionCard = ({
 
         <StyledSecondaryButton
           onClick={() => {
-            dispatch(showCurrentCodes(id));
+            dispatch(setDisplayedSubscriptionId(id));
           }}
         >
           View

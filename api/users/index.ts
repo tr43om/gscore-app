@@ -20,7 +20,7 @@ export const fetchSignUp = async ({ username, email, password }: SignUpDto) => {
     username,
     password,
   });
-
+  setCookie(ACCESS_TOKEN, data.token);
   return data;
 };
 

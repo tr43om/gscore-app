@@ -15,3 +15,4 @@ export { default as FacebookIcon } from "./FacebookIcon";
 export { default as LinkedInIcon } from "./LinkedInIcon";
 
 export { default as SpinnerIcon } from "./SpinnerIcon";
+export { default as ClipboardIcon } from "./ClipboardIcon";

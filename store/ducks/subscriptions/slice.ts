@@ -7,12 +7,12 @@ interface SubscriptionsSliceState {
   subscriptions: SubscribeResponseDto[];
   loading: boolean;
   error: SerializedError | null;
-  currentCodes: LicenceCodeResponseDto[];
+  displayedSubscriptionId: number;
 }
 
 const initialState: SubscriptionsSliceState = {
   subscriptions: [],
-  currentCodes: [],
+  displayedSubscriptionId: 0,
   error: null,
   loading: false,
 };
@@ -21,10 +21,8 @@ export const { actions, reducer } = createSlice({
   name: "subscriptions",
   initialState,
   reducers: {
-    showCurrentCodes: (state, action: PayloadAction<number>) => {
-      state.currentCodes =
-        state.subscriptions.find((sub) => sub.id === action.payload)?.codes ||
-        [];
+    setDisplayedSubscriptionId: (state, { payload }: PayloadAction<number>) => {
+      state.displayedSubscriptionId = payload;
     },
   },
   extraReducers: (builder) => {
@@ -44,6 +42,6 @@ export const { actions, reducer } = createSlice({
   },
 });
 
-export const { showCurrentCodes } = actions;
+export const { setDisplayedSubscriptionId } = actions;
 
 export const subscriptionsReducer = reducer;

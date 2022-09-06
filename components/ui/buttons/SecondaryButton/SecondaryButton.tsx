@@ -11,7 +11,7 @@ const SecondaryButton = ({
 }: IButtonProps) => {
   return (
     <Root onClick={onClick} fullWidth={$fullWidth} className={className}>
-      {!isLoading ? children : <Spinner />}
+      {!isLoading ? children : <StyledSpinner />}
     </Root>
   );
 };
@@ -55,6 +55,12 @@ const Root = styled.button<RootProps>`
 
   &:focus {
     outline: 4px solid ${({ theme: { colors } }) => `${colors.neutral100}4c`};
+  }
+`;
+
+const StyledSpinner = styled(Spinner)`
+  & > * {
+    stroke: ${({ theme: { colors } }) => colors.accent};
   }
 `;
 

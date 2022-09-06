@@ -1,1 +1,1 @@
-export { default as CodeCard } from "./LisenseCodeCard";
+export { default as LicenseCodeCard } from "./LisenseCodeCard";

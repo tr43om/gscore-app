@@ -2,12 +2,13 @@ import styled from "styled-components";
 import { SpinnerIcon } from "../../../assets";
 import { keyframes } from "styled-components";
 
-const Spinner = ({ $color }: SpinnerProps) => {
-  return <StyledSpinner stroke={$color} />;
+const Spinner = ({ $color, className }: SpinnerProps) => {
+  return <StyledSpinner stroke={$color} className={className} />;
 };
 
 type SpinnerProps = {
   $color?: string;
+  className?: string;
 };
 
 const spinAnimation = keyframes`
