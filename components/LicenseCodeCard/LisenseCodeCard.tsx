@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ClipboardIcon } from "../../assets";
+
 import { LicenceCodeResponseDto } from "../../types/models/LicenceCodeResponseDto";
 import { Checkbox, SecondaryButton } from "../ui";
 import { activateCode } from "../../store/ducks";
@@ -26,16 +26,13 @@ const LicenseCodeCard = ({ code }: LicenseCodeCardProps) => {
       <LicenseCodeContainer>
         <Title>License Code</Title>
 
-        <InfoField
-          defaultValue={code.code}
-          icon={<ClipboardIcon width={30} height={30} />}
-        />
+        <InfoField defaultValue={code.code} copy />
       </LicenseCodeContainer>
 
       <Wrapper>
         <DomainContainer>
           <Title>Domain</Title>
-          <InfoField defaultValue="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque officia accusantium, laborum autem illum cupiditate possimus ea tenetur hic explicabo odit soluta non nulla nobis, necessitatibus similique blanditiis provident." />
+          <InfoField defaultValue="" />
         </DomainContainer>
         {status !== "Active" && (
           <StyledSecondaryButton

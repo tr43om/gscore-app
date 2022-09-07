@@ -1,14 +1,34 @@
 import styled from "styled-components";
-import { InputHTMLAttributes, ReactNode } from "react";
+import { InputHTMLAttributes, useState } from "react";
+import { copyTextToClipboard } from "../../../../helpers";
+import { ClipboardIcon } from "../../../../assets";
 
-const InfoField = (props: InfoFieldProps) => {
+const InfoField = ({ defaultValue, copy = false }: InfoFieldProps) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const onCopy = async () => {
+    await copyTextToClipboard(`${defaultValue}`)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Root>
-      <Input
-        defaultValue={props.defaultValue}
-        isWithIcon={Boolean(props.icon)}
-      />
-      <Icon>{props.icon}</Icon>
+      <Input defaultValue={defaultValue} isWithIcon={copy} />
+      {copy && (
+        <Icon>
+          {isCopied ? (
+            "copied"
+          ) : (
+            <ClipboardIcon width={30} height={30} onClick={onCopy} />
+          )}
+        </Icon>
+      )}
     </Root>
   );
 };
@@ -45,7 +65,7 @@ const Icon = styled.div`
 `;
 
 interface InfoFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  icon?: ReactNode;
+  copy?: boolean;
 }
 
 export default InfoField;
