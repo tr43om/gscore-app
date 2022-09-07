@@ -7,13 +7,13 @@ const Socials = (props: SocialProps) => {
   return (
     <Icons>
       <Icon>
-        <FacebookIcon />
+        <FacebookIcon width={30} height={30} />
       </Icon>
       <Icon>
-        <TwitterIcon />
+        <TwitterIcon width={30} height={30} />
       </Icon>
       <Icon>
-        <LinkedInIcon />
+        <LinkedInIcon width={30} height={30} />
       </Icon>
     </Icons>
   );

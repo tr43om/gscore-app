@@ -6,11 +6,11 @@ import styled from "styled-components";
 // redux
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store/store";
-import { login } from "../../store/rootReducer";
+import { getSubscriptions, login, getCodes } from "../../store/rootReducer";
 import { selectUser } from "../../store/rootReducer";
 
 // types
-import { SignInValues } from "../../types";
+import { SignInDto } from "../../types";
 
 // components
 import { Stepper, PrimaryButton, FormInput, Error } from "../../components";
@@ -20,7 +20,7 @@ const SignInScreen = (props: SignInScreenProps) => {
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
 
-  const { handleSubmit, control } = useForm<SignInValues>({
+  const { handleSubmit, control } = useForm<SignInDto>({
     defaultValues: {
       email: "",
       password: "",
@@ -30,7 +30,11 @@ const SignInScreen = (props: SignInScreenProps) => {
     mode: "onChange",
   });
 
-  const signIn = handleSubmit((data) => dispatch(login(data)));
+  const signIn = handleSubmit(async (data) => {
+    await dispatch(login(data));
+    await dispatch(getSubscriptions());
+    await dispatch(getCodes());
+  });
 
   return (
     <Main>
