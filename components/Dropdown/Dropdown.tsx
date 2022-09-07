@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowDownIcon, LogOutIcon, SettingsIcon } from "../../assets";
+import useOnClickOutside from "../../hooks/useOnOutsideClick";
 
 import Link from "next/link";
 import { useAppDispatch } from "../../store/store";
@@ -8,7 +9,9 @@ import { logOut } from "../../store/ducks/user";
 
 const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
+  useOnClickOutside(dropdownRef, () => setIsOpen(false));
   return (
     <Root>
       <DropdownLabel onClick={() => setIsOpen((p) => !p)}>
@@ -16,7 +19,7 @@ const Dropdown = (props: DropdownProps) => {
         <ArrowIconStyled isOpen={isOpen} />
       </DropdownLabel>
       {isOpen && (
-        <DropdownItems>
+        <DropdownItems ref={dropdownRef}>
           <Link href="/settings">
             <DropdownItem>
               <SettingsIcon />
@@ -48,7 +51,9 @@ const DropdownLabel = styled.div`
   display: flex;
   gap: 0.75rem;
 `;
-const DropdownItems = styled.ul`
+const DropdownItems = styled.ul.attrs(({ ref }) => ({
+  ref: ref,
+}))`
   display: grid;
   gap: 2rem;
   position: absolute;
