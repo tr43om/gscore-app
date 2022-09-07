@@ -12,7 +12,6 @@ import {
   selectCodesById,
   selectDisplayedSubscriptionId,
 } from "../../store/ducks";
-
 import { RootState } from "../../store/store";
 
 const SubscriptionsScreen = (props: SubscriptionsScreenProps) => {

@@ -1,5 +1,6 @@
 import { RootState } from "../../store";
 import { createSelector } from "@reduxjs/toolkit";
+import { LicenceCodeResponseDto } from "../../../types";
 
 export const getActivationStatus = createSelector(
   ({ codes: { error, loading } }: RootState) => {
@@ -19,7 +20,7 @@ const selectId = (state: RootState, subscriptionId: number) => subscriptionId;
 
 export const selectCodesById = createSelector(
   [selectCodes, selectId],
-  (codes, subscriptionId) => {
+  (codes: LicenceCodeResponseDto[], subscriptionId) => {
     return codes.filter((code) => code.subscribeId == subscriptionId);
   }
 );

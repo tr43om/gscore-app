@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { PrimaryButton, Stepper, CheckoutCard } from "../../components";
-
+import { useAppDispatch } from "../../store/store";
+import { getProducts } from "../../store/ducks/products";
 import { withAuth } from "../../hocs/withAuth";
-import { ProductsType } from "../../types";
-
+import { ProductResponseDto } from "../../types";
 const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
   return (
     <Main>
       <Stepper $step={3} $mb="4rem" />
@@ -16,7 +21,7 @@ const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
 };
 
 type CheckoutScreenProps = {
-  products: ProductsType;
+  products: ProductResponseDto[];
 };
 
 const Main = styled.main`

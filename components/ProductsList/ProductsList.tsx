@@ -15,7 +15,6 @@ const ProductsList = (props: ProductsListProps) => {
           "Unlimited Pages and Keywords",
           "Billed annually",
         ]}
-        onClick={() => router.push("/checkout")}
       />
 
       <Product
@@ -28,7 +27,6 @@ const ProductsList = (props: ProductsListProps) => {
           "Unlimited Pages and Keywords",
           "Billed annually",
         ]}
-        onClick={() => router.push("/checkout")}
         $accent
       />
 
@@ -42,7 +40,6 @@ const ProductsList = (props: ProductsListProps) => {
           "Unlimited Pages and Keywords",
           "Billed annually",
         ]}
-        onClick={() => router.push("/checkout")}
       />
     </Root>
   );

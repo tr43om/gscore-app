@@ -1,15 +1,16 @@
 export * from "./ducks";
 
-import { Action, combineReducers } from "@reduxjs/toolkit";
+import { AnyAction, combineReducers } from "@reduxjs/toolkit";
 import { reducers } from "./ducks";
 import { logOut } from "./ducks/user";
-import { RootState } from "./store";
 
 const appReducer = combineReducers(reducers);
 
-const rootReducer = (state: RootState, action: Action) => {
+export type RootState = ReturnType<typeof appReducer>;
+
+const rootReducer = (state: RootState | undefined, action: AnyAction) => {
   // Clear all data in redux store to initial.
-  if (action.type === logOut.type) state = [];
+  if (action.type === logOut.type) state = {} as RootState;
 
   return appReducer(state, action);
 };

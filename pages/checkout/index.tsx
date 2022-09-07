@@ -12,7 +12,6 @@ const CheckoutPage: NextPage = ({
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const products = await fetchGetProducts();
-  store.dispatch(fetchGetProducts);
   return { props: { products } };
 };
 

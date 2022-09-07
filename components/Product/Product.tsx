@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Divider, SecondaryButton } from "../ui";
 
 import { CheckIconRounded } from "../../assets";
+import Link from "next/link";
 
 const Product = (props: ProductProps) => {
   return (
@@ -23,7 +24,9 @@ const Product = (props: ProductProps) => {
           </Feature>
         ))}
       </Features>
-      <OfferButton onClick={props.onClick}>Get Gscore</OfferButton>
+      <Link href="/checkout">
+        <OfferButton>Get Gscore</OfferButton>
+      </Link>
     </Root>
   );
 };
