@@ -144,6 +144,7 @@ const shadows = {
   white01: "0px 4px 10px rgba(20, 20, 43, 0.04)",
   white02: "0px 6px 20px rgba(20, 20, 43, 0.06)",
   white03: "0px 10px 28px rgba(20, 20, 43, 0.1)",
+  general01: "0px 2px 6px rgba(20, 20, 43, 0.06)",
 };
 
 export const theme: DefaultTheme = {

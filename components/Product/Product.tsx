@@ -2,7 +2,7 @@ import _ from "lodash";
 import styled from "styled-components";
 import { Divider, SecondaryButton } from "../ui";
 
-import { CheckIcon } from "../../assets";
+import { CheckIconRounded } from "../../assets";
 
 const Product = (props: ProductProps) => {
   return (
@@ -18,7 +18,7 @@ const Product = (props: ProductProps) => {
       <Features>
         {props.features.map((feature, i) => (
           <Feature key={i}>
-            <CheckIcon width="29px" height="29px" />
+            <CheckIconRounded width="29px" height="29px" />
             <span>{feature}</span>
           </Feature>
         ))}

@@ -4,7 +4,7 @@ export { default as ArrowLeftIcon } from "./ArrowLeftIcon";
 export { default as LogOutIcon } from "./LogOutIcon";
 export { default as SettingsIcon } from "./SettingsIcon";
 
-export { default as CheckIcon } from "./CheckIcon";
+export { default as CheckIconRounded } from "./CheckIconRounded";
 
 export { default as ShoppingBasketIcon } from "./ShoppingBasket";
 export { default as ErrorIcon } from "./ErrorIcon";
@@ -16,3 +16,4 @@ export { default as LinkedInIcon } from "./LinkedInIcon";
 
 export { default as SpinnerIcon } from "./SpinnerIcon";
 export { default as ClipboardIcon } from "./ClipboardIcon";
+export { default as CheckIcon } from "./CheckIcon";

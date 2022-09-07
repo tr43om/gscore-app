@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { ClipboardIcon } from "../../assets";
 import { LicenceCodeResponseDto } from "../../types/models/LicenceCodeResponseDto";
-import { SecondaryButton } from "../ui";
+import { Checkbox, SecondaryButton } from "../ui";
 import { activateCode } from "../../store/ducks";
 import { useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
 import { getActivationStatus } from "../../store/ducks";
+import { InfoField } from "../ui";
 
 const LicenseCodeCard = ({ code }: LicenseCodeCardProps) => {
   const dispatch = useAppDispatch();
@@ -17,25 +18,38 @@ const LicenseCodeCard = ({ code }: LicenseCodeCardProps) => {
   };
   return (
     <Root>
-      <StatusCheckbox />
+      <CheckboxContainer>
+        <span></span>
+        <Checkbox id={`${code.id}`} />
+      </CheckboxContainer>
+
       <LicenseCodeContainer>
         <Title>License Code</Title>
-        <CodeField>{code.code}</CodeField>
+
+        <InfoField
+          defaultValue={code.code}
+          icon={<ClipboardIcon width={30} height={30} />}
+        />
       </LicenseCodeContainer>
 
-      <DomainContainer>
-        <Title>Domain</Title>
-        <DomainField></DomainField>
-      </DomainContainer>
-
-      {status !== "Active" && (
-        <SecondaryButton isLoading={loading} onClick={handleActivateCode}>
-          Activate
-        </SecondaryButton>
-      )}
+      <Wrapper>
+        <DomainContainer>
+          <Title>Domain</Title>
+          <InfoField defaultValue="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque officia accusantium, laborum autem illum cupiditate possimus ea tenetur hic explicabo odit soluta non nulla nobis, necessitatibus similique blanditiis provident." />
+        </DomainContainer>
+        {status !== "Active" && (
+          <StyledSecondaryButton
+            isLoading={loading}
+            onClick={handleActivateCode}
+          >
+            Activate
+          </StyledSecondaryButton>
+        )}
+      </Wrapper>
 
       <StatusContainer>
         <Title>Status</Title>
+
         <Status isActive={status === "Active"}>{status}</Status>
       </StatusContainer>
     </Root>
@@ -43,11 +57,19 @@ const LicenseCodeCard = ({ code }: LicenseCodeCardProps) => {
 };
 
 const Root = styled.section`
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: auto 4fr 6fr 1fr;
+  gap: 1.8rem;
   background-color: ${({ theme: { colors } }) => colors.neutral700};
   border-radius: 12px;
+  max-width: 100%;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 `;
 
 const Title = styled.h3`
@@ -63,21 +85,36 @@ const Title = styled.h3`
 `;
 
 const Status = styled.p<{ isActive: boolean }>`
+  font: ${({
+    theme: {
+      variants: {
+        typography4: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
   color: ${({ isActive, theme: { colors } }) =>
     isActive ? colors.systemGreen : colors.systemRed300};
+  margin-top: 1.5rem;
 `;
 
-const Field = styled.div`
-  color: ${({ theme: { colors } }) => colors.neutral500};
-  background-color: ${({ theme: { colors } }) => colors.neutral600};
-  border-radius: 12px;
+const Column = styled.div`
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.8rem;
 `;
-const CodeField = styled(Field)``;
-const DomainField = styled(Field)``;
-const StatusCheckbox = styled.div``;
-const LicenseCodeContainer = styled.div``;
-const DomainContainer = styled.div``;
-const StatusContainer = styled.div``;
+const LicenseCodeContainer = styled(Column)``;
+const DomainContainer = styled(Column)`
+  flex: 1;
+`;
+const StatusContainer = styled(Column)``;
+const CheckboxContainer = styled(Column)`
+  margin-top: 0.7rem;
+`;
+
+const StyledSecondaryButton = styled(SecondaryButton)`
+  margin-top: 1.3rem;
+  max-width: 7rem;
+`;
 
 type LicenseCodeCardProps = {
   code: LicenceCodeResponseDto;

@@ -34,7 +34,7 @@ const Root = styled.div`
   position: relative;
 `;
 
-const Input = styled.input<{
+export const Input = styled.input<{
   error: boolean;
   success: boolean;
 }>`
