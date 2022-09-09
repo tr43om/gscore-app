@@ -7,28 +7,37 @@ import Link from "next/link";
 import { useAppDispatch } from "../../store/store";
 import { logOut } from "../../store/ducks/user";
 
+import { useDesktopMediaQuery } from "../../styles/breakpoints";
+
+import { useSelector } from "react-redux";
+import { selectUsername } from "../../store/ducks/user/selectors";
+
 const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
+  const isDesktop = useDesktopMediaQuery();
+  const username = useSelector(selectUsername);
+
   useOnClickOutside(dropdownRef, () => setIsOpen(false));
+
   return (
-    <Root>
+    <Root isDesktop={isDesktop}>
       <DropdownLabel onClick={() => setIsOpen((p) => !p)}>
-        <Label>{props.label}</Label>
+        <Label>{username}</Label>
         <ArrowIconStyled isOpen={isOpen} />
       </DropdownLabel>
       {isOpen && (
         <DropdownItems ref={dropdownRef}>
           <Link href="/settings">
             <DropdownItem>
-              <SettingsIcon />
+              <SettingsIconStyled />
               <Label>Settings</Label>
             </DropdownItem>
           </Link>
           <Link href="/">
             <DropdownItem onClick={() => dispatch(logOut())}>
-              <LogOutIcon />
+              <LogOutIconStyled />
               <Label>Logout</Label>
             </DropdownItem>
           </Link>
@@ -38,47 +47,77 @@ const Dropdown = (props: DropdownProps) => {
   );
 };
 
-type DropdownProps = {
-  label: string;
-};
+type DropdownProps = {};
 
-const Root = styled.div`
-  position: relative;
-`;
-
-const DropdownLabel = styled.div`
-  cursor: pointer;
-  display: flex;
-  gap: 0.75rem;
-`;
 const DropdownItems = styled.ul.attrs(({ ref }) => ({
   ref: ref,
-}))`
-  display: grid;
-  gap: 2rem;
-  position: absolute;
-  right: 0;
-  top: 2rem;
-  padding: 2rem 1.5rem;
-  border-radius: 12px;
-  list-style: none;
-  background-color: ${({ theme: { colors } }) => colors.neutral700};
-`;
-const DropdownItem = styled.li`
-  display: flex;
-  cursor: pointer;
-  gap: 0.9rem;
-  color: ${({ theme }) => theme.colors.neutral100};
-`;
+}))``;
+const DropdownItem = styled.li``;
+const DropdownLabel = styled.div``;
+const Label = styled.p``;
+const SettingsIconStyled = styled(SettingsIcon)``;
+const LogOutIconStyled = styled(LogOutIcon)``;
 
-const Label = styled.p`
+const Root = styled.div<{ isDesktop: boolean }>`
+  position: relative;
   font: ${({
     theme: {
-      variants: {
-        textSingle300: { lineHeight, fontFamily, fontSize },
-      },
+      variants: { textSingle300: s300, textSingle100Regular: s100 },
     },
-  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+    isDesktop,
+  }) =>
+    isDesktop
+      ? `${s300.fontSize}/${s300.lineHeight} ${s300.fontFamily}`
+      : `${s100.fontSize}/${s100.lineHeight} ${s100.fontFamily}`};
+
+  ${DropdownItems} {
+    display: grid;
+    gap: 2rem;
+    padding: 0;
+    padding-top: 2rem;
+
+    border-radius: 12px;
+    list-style: none;
+    background-color: ${({ theme: { colors } }) => colors.neutral700};
+    ${({ isDesktop }) =>
+      isDesktop &&
+      `
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    padding: 2rem 1.5rem;
+    `};
+
+    ${DropdownItem} {
+      display: flex;
+      cursor: pointer;
+      gap: 0.9rem;
+      color: ${({
+        theme: {
+          colors: { neutral100, neutral500 },
+        },
+        isDesktop,
+      }) => (isDesktop ? neutral100 : neutral500)};
+
+      ${SettingsIconStyled}, ${LogOutIconStyled} {
+        & > path {
+          stroke: ${({
+            theme: {
+              colors: { neutral100, neutral500 },
+            },
+            isDesktop,
+          }) => (isDesktop ? neutral100 : neutral500)};
+        }
+      }
+    }
+  }
+
+  ${DropdownLabel} {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
 `;
 const ArrowIconStyled = styled(ArrowDownIcon)<{ isOpen: boolean }>`
   transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "")};

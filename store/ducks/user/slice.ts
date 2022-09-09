@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import { login, signup, changePassword, changePersonalInfo } from "./actions";
 import { User } from "../../../types";
+import { UserResponseDto } from "../../../types";
 import { deleteCookie } from "cookies-next";
 import { ACCESS_TOKEN } from "../../../constants";
 

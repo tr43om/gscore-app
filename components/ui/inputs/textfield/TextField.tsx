@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { ErrorIcon, SuccessIcon } from "../../../../assets";
+import { CrossIcon, SuccessIcon } from "../../../../assets";
 
 const TextField = ({
   placeholder = "Placeholder",
@@ -73,7 +73,7 @@ const StyledSuccessIcon = styled(SuccessIcon)<{ success: boolean }>`
   }
 `;
 
-const StyledErrorIcon = styled(ErrorIcon)<{ error: boolean }>`
+const StyledErrorIcon = styled(CrossIcon)<{ error: boolean }>`
   position: absolute;
   display: ${({ error }) => (error ? "block" : "none")};
   top: 25px;

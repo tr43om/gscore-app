@@ -14,7 +14,7 @@ export const reducers = {
 };
 
 // selectors
-export { selectUser } from "./user";
+export { selectUser, selectUsername } from "./user";
 export { getPaymentStatus } from "./payment";
 export { selectProducts, selectProductById } from "./products";
 export {

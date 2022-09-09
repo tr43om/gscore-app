@@ -5,10 +5,16 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/rootReducer";
 import { Dropdown } from "../../Dropdown";
 import { useRouter } from "next/router";
+import { useTabletAndBelowMediaQuery } from "../../../styles/breakpoints";
+import { BurgerIcon } from "../../../assets";
+import { Sidebar } from "../../Sidebar";
+import { useState } from "react";
 
 const Header = (props: HeaderProps) => {
   const { isAuthorized, userInfo } = useSelector(selectUser);
   const { pathname } = useRouter();
+  const isTabletAndBelow = useTabletAndBelowMediaQuery();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <HeaderContainer>
@@ -26,10 +32,21 @@ const Header = (props: HeaderProps) => {
         pathname !== "/start-subscription" &&
         pathname !== "/checkout" && (
           <Navigation>
-            <Link href="/subscriptions">
-              <StyledLink>My subscriptions</StyledLink>
-            </Link>
-            <Dropdown label={userInfo?.username || ""} />
+            {isTabletAndBelow ? (
+              <>
+                <BurgerIcon onClick={() => setIsSidebarOpen(true)} />
+                {isSidebarOpen && (
+                  <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
+                )}
+              </>
+            ) : (
+              <>
+                <Link href="/subscriptions">
+                  <StyledLink>My subscriptions</StyledLink>
+                </Link>
+                <Dropdown />
+              </>
+            )}
           </Navigation>
         )}
     </HeaderContainer>

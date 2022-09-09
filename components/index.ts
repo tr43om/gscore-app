@@ -8,4 +8,5 @@ export * from "./CheckoutProducts";
 export * from "./SubscriptionCard";
 export * from "./SubscriptionsList";
 export * from "./LicenseCodeCard";
+export * from "./Sidebar";
 export * from "./ui";
