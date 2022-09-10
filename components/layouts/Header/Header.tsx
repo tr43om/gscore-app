@@ -5,15 +5,14 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/rootReducer";
 import { Dropdown } from "../../Dropdown";
 import { useRouter } from "next/router";
-import { useTabletAndBelowMediaQuery } from "../../../styles/breakpoints";
+
 import { BurgerIcon } from "../../../assets";
 import { Sidebar } from "../../Sidebar";
 import { useState } from "react";
 
 const Header = (props: HeaderProps) => {
-  const { isAuthorized, userInfo } = useSelector(selectUser);
+  const { isAuthorized } = useSelector(selectUser);
   const { pathname } = useRouter();
-  const isTabletAndBelow = useTabletAndBelowMediaQuery();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -31,23 +30,21 @@ const Header = (props: HeaderProps) => {
       {isAuthorized &&
         pathname !== "/start-subscription" &&
         pathname !== "/checkout" && (
-          <Navigation>
-            {isTabletAndBelow ? (
-              <>
-                <BurgerIcon onClick={() => setIsSidebarOpen(true)} />
-                {isSidebarOpen && (
-                  <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
-                )}
-              </>
-            ) : (
-              <>
-                <Link href="/subscriptions">
-                  <StyledLink>My subscriptions</StyledLink>
-                </Link>
-                <Dropdown />
-              </>
-            )}
-          </Navigation>
+          <>
+            <LaptopAndBelow>
+              <BurgerIcon onClick={() => setIsSidebarOpen(true)} />
+              {isSidebarOpen && (
+                <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
+              )}
+            </LaptopAndBelow>
+
+            <Desktop>
+              <Link href="/subscriptions">
+                <StyledLink>My subscriptions</StyledLink>
+              </Link>
+              <Dropdown />
+            </Desktop>
+          </>
         )}
     </HeaderContainer>
   );
@@ -65,6 +62,19 @@ const HeaderContainer = styled.header`
 const Navigation = styled.nav`
   display: flex;
   gap: 2rem;
+`;
+
+const LaptopAndBelow = styled(Navigation)`
+  display: none;
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    display: flex;
+  }
+`;
+const Desktop = styled(Navigation)`
+  display: none;
+  @media ${({ theme: { devices } }) => devices.desktop} {
+    display: flex;
+  }
 `;
 
 const StyledLink = styled.a`

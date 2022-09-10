@@ -75,6 +75,15 @@ const Header = styled.header`
       },
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    padding: 2rem 1.5rem 1.5rem 1rem;
+    font: ${({
+      theme: {
+        variants: { textSingle300: t },
+      },
+    }) => `${t.fontSize}/${t.lineHeight} ${t.fontFamily}`};
+  }
 `;
 const Status = styled.p<{ isActive: boolean }>`
   color: ${({ isActive, theme: { colors } }) =>
@@ -83,6 +92,10 @@ const Status = styled.p<{ isActive: boolean }>`
 
 const Body = styled.main`
   padding: 2rem 5.5rem 3rem 2rem;
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    padding: 2rem 1.5rem 1.5rem 1rem;
+  }
 `;
 
 const Content = styled.div`
@@ -99,6 +112,14 @@ const Package = styled.p`
       },
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    font: ${({
+      theme: {
+        variants: { paragraphDefault: t },
+      },
+    }) => `${t.fontSize}/${t.lineHeight} ${t.fontFamily}`};
+  }
 `;
 const Price = styled(Package)``;
 

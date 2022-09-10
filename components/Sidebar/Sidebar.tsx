@@ -14,7 +14,7 @@ const Sidebar = (props: SidebarProps) => {
     <Root>
       <SidebarContent ref={sidebarRef}>
         <Header>
-          <CrossIcon width={23} height={23} onClick={props.closeSidebar} />
+          <CrossIcon width={27} height={27} onClick={props.closeSidebar} />
           <Link href="/">
             <Image src="/images/Logo.svg" alt="logo" width="130" height="32" />
           </Link>
@@ -51,8 +51,8 @@ const Root = styled.aside`
 const SidebarContent = styled.div.attrs(({ ref }) => ({
   ref: ref,
 }))`
-  width: 50vw;
-  max-width: 18.5rem;
+  width: 40vw;
+
   height: 100vh;
   padding: 2rem 1.5rem;
   background-color: ${({ theme: { colors } }) => colors.neutral700};
@@ -64,6 +64,11 @@ const SidebarContent = styled.div.attrs(({ ref }) => ({
       },
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+
+  @media ${({ theme: { devices } }) => devices.tabletAndBelow} {
+    width: 100%;
+    max-width: 13rem;
+  }
 `;
 
 const StyledLink = styled.a`

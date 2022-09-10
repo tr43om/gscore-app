@@ -7,25 +7,23 @@ import Link from "next/link";
 import { useAppDispatch } from "../../store/store";
 import { logOut } from "../../store/ducks/user";
 
-import { useDesktopMediaQuery } from "../../styles/breakpoints";
-
 import { useSelector } from "react-redux";
-import { selectUsername } from "../../store/ducks/user/selectors";
+import { selectUsername } from "../../store/ducks";
 
 const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
-  const isDesktop = useDesktopMediaQuery();
+
   const username = useSelector(selectUsername);
 
   useOnClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
-    <Root isDesktop={isDesktop}>
+    <Root>
       <DropdownLabel onClick={() => setIsOpen((p) => !p)}>
         <Label>{username}</Label>
-        <ArrowIconStyled isOpen={isOpen} />
+        <ArrowIconStyled $isOpen={isOpen} />
       </DropdownLabel>
       {isOpen && (
         <DropdownItems ref={dropdownRef}>
@@ -49,78 +47,81 @@ const Dropdown = (props: DropdownProps) => {
 
 type DropdownProps = {};
 
-const DropdownItems = styled.ul.attrs(({ ref }) => ({
-  ref: ref,
-}))``;
-const DropdownItem = styled.li``;
-const DropdownLabel = styled.div``;
-const Label = styled.p``;
-const SettingsIconStyled = styled(SettingsIcon)``;
-const LogOutIconStyled = styled(LogOutIcon)``;
-
-const Root = styled.div<{ isDesktop: boolean }>`
+const Root = styled.div`
   position: relative;
+
   font: ${({
     theme: {
-      variants: { textSingle300: s300, textSingle100Regular: s100 },
+      variants: { textSingle300: t },
     },
-    isDesktop,
-  }) =>
-    isDesktop
-      ? `${s300.fontSize}/${s300.lineHeight} ${s300.fontFamily}`
-      : `${s100.fontSize}/${s100.lineHeight} ${s100.fontFamily}`};
+  }) => `${t.fontSize}/${t.lineHeight} ${t.fontFamily}`};
 
-  ${DropdownItems} {
-    display: grid;
-    gap: 2rem;
-    padding: 0;
-    padding-top: 2rem;
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    font: ${({
+      theme: {
+        variants: { textSingle100Regular: t },
+      },
+    }) => `${t.fontSize}/${t.lineHeight} ${t.fontFamily}`};
+  }
+`;
 
-    border-radius: 12px;
-    list-style: none;
-    background-color: ${({ theme: { colors } }) => colors.neutral700};
-    ${({ isDesktop }) =>
-      isDesktop &&
-      `
+const DropdownItems = styled.ul.attrs(({ ref }) => ({
+  ref: ref,
+}))`
+  display: grid;
+  gap: 2rem;
+  padding: 0;
+  padding-top: 2rem;
+
+  border-radius: 12px;
+  list-style: none;
+  background-color: ${({ theme: { colors } }) => colors.neutral700};
+
+  @media ${({ theme: { devices } }) => devices.desktop} {
     position: absolute;
     right: 0;
     top: 2rem;
     padding: 2rem 1.5rem;
-    `};
+  }
+`;
 
-    ${DropdownItem} {
-      display: flex;
-      cursor: pointer;
-      gap: 0.9rem;
-      color: ${({
-        theme: {
-          colors: { neutral100, neutral500 },
-        },
-        isDesktop,
-      }) => (isDesktop ? neutral100 : neutral500)};
+const SettingsIconStyled = styled(SettingsIcon)``;
+const LogOutIconStyled = styled(LogOutIcon)``;
+const DropdownItem = styled.li`
+  display: flex;
+  cursor: pointer;
+  gap: 0.9rem;
 
-      ${SettingsIconStyled}, ${LogOutIconStyled} {
-        & > path {
-          stroke: ${({
-            theme: {
-              colors: { neutral100, neutral500 },
-            },
-            isDesktop,
-          }) => (isDesktop ? neutral100 : neutral500)};
-        }
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    color: ${({
+      theme: {
+        colors: { neutral500 },
+      },
+    }) => neutral500};
+  }
+
+  ${SettingsIconStyled}, ${LogOutIconStyled} {
+    & > path {
+      @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+        color: ${({
+          theme: {
+            colors: { neutral500 },
+          },
+        }) => neutral500};
       }
     }
   }
-
-  ${DropdownLabel} {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
 `;
-const ArrowIconStyled = styled(ArrowDownIcon)<{ isOpen: boolean }>`
-  transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "")};
+const DropdownLabel = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+`;
+const Label = styled.p``;
+
+const ArrowIconStyled = styled(ArrowDownIcon)<{ $isOpen: boolean }>`
+  transform: ${({ $isOpen }) => ($isOpen ? "rotate(180deg)" : "")};
 `;
 
 export default Dropdown;

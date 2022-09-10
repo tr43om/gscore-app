@@ -8,14 +8,27 @@ import { SubscriptionCard } from "../SubscriptionCard";
 import { SubscriptionsListActions } from "../SubscriptionsListActions.tsx";
 import { useState } from "react";
 
+import { useTheme } from "styled-components";
+
 const SubscriptionsList = ({ subscriptions }: SubscriptionsListProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const {
+    breakpoints: { tablet, mobileS },
+  } = useTheme();
 
   return (
     <SwiperContainer
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
-      slidesPerView={2}
+      slidesPerView={1}
+      breakpoints={{
+        [mobileS]: {
+          slidesPerView: 1,
+        },
+        [tablet]: {
+          slidesPerView: 2,
+        },
+      }}
       navigation
       allowSlideNext
       allowSlidePrev

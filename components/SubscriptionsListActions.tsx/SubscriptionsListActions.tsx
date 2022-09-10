@@ -10,7 +10,7 @@ const SubscriptionsListActions = ({
 
   return (
     <Root>
-      <Action disabled={activeIndex <= 1} onClick={() => swiper.slidePrev()}>
+      <Action $disabled={activeIndex <= 1} onClick={() => swiper.slidePrev()}>
         <ButtonPrev />
       </Action>
 
@@ -20,7 +20,7 @@ const SubscriptionsListActions = ({
       </Pagination>
 
       <Action
-        disabled={activeIndex === slidesLength}
+        $disabled={activeIndex === slidesLength}
         onClick={() => swiper.slideNext()}
       >
         <ButtonNext />
@@ -32,6 +32,7 @@ const SubscriptionsListActions = ({
 const Root = styled.div`
   display: flex;
   align-items: center;
+
   gap: 0.8rem;
   font: ${({
     theme: {
@@ -41,9 +42,13 @@ const Root = styled.div`
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
   margin-top: 2rem;
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    justify-content: center;
+  }
 `;
 
-const Action = styled.div<{ disabled: boolean }>`
+const Action = styled.div<{ $disabled: boolean }>`
   display: flex;
   border: 1px solid ${({ theme: { colors } }) => colors.neutral500};
   padding: 10px;
@@ -52,12 +57,16 @@ const Action = styled.div<{ disabled: boolean }>`
 
   &,
   & > * {
-    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+    opacity: ${({ $disabled }) => ($disabled ? 0.4 : 1)};
   }
 
   & > * {
     width: 20px;
     height: 20px;
+  }
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    display: none;
   }
 `;
 

@@ -147,9 +147,28 @@ const shadows = {
   general01: "0px 2px 6px rgba(20, 20, 43, 0.06)",
 };
 
+const breakpoints = {
+  mobileS: "320",
+  mobileM: "375",
+  mobileL: "425",
+  tablet: "768",
+  laptop: "1024",
+  laptopL: "1440",
+  desktop: "2560",
+};
+
+const devices = {
+  mobile: `(min-width: ${breakpoints.mobileL}px)`,
+  tabletAndBelow: `(max-width: ${breakpoints.tablet}px)`,
+  laptopAndBelow: `(max-width: ${breakpoints.laptop}px)`,
+  desktop: `(min-width: ${breakpoints.laptop}px)`,
+};
+
 export const theme: DefaultTheme = {
   fonts,
   variants,
   shadows,
   colors,
+  breakpoints,
+  devices,
 };

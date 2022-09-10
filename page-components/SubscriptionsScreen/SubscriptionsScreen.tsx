@@ -51,7 +51,14 @@ const Title = styled.h3<{ mb?: number }>`
       },
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
-  margin-bottom: ${({ mb }) => `${mb}rem`};
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    font: ${({
+      theme: {
+        variants: { specialHeading4: t },
+      },
+    }) => `${t.fontSize}/${t.lineHeight} ${t.fontFamily}`};
+  }
 `;
 
 const Header = styled.header`
@@ -64,6 +71,14 @@ const Header = styled.header`
 const StyledPrimaryButton = styled(PrimaryButton)`
   max-width: 150px;
   padding-block: 26px;
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    width: max-content;
+    padding: 0;
+    background: none;
+    color: ${({ theme: { colors } }) => colors.accent};
+    box-shadow: none;
+  }
 `;
 
 const LicenseCodesList = styled.section`

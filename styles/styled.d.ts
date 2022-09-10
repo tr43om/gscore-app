@@ -19,5 +19,11 @@ declare module "styled-components" {
     colors: {
       [key: string]: string;
     };
+    breakpoints: {
+      [key: string]: string;
+    };
+    devices: {
+      [key: string]: string;
+    };
   }
 }
