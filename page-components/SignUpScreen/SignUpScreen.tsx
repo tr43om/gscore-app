@@ -1,16 +1,16 @@
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
 import styled from "styled-components";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+
+import { useSelector } from "react-redux";
+import { useAppDispatch, selectUser, signup } from "../../store";
 
 import { Stepper, PrimaryButton, FormInput } from "../../components";
 
-import { signup } from "../../store/rootReducer";
-import { selectUser } from "../../store/rootReducer";
-import { useAppDispatch } from "../../store/store";
-import { useSelector } from "react-redux";
-import { withoutAuth } from "../../hocs/withoutAuth";
+import { withoutAuth } from "../../hocs";
 
 import { SignUpDto } from "../../types";
 

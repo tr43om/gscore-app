@@ -1,8 +1,8 @@
 import styled from "styled-components";
+
 import { Divider, SecondaryButton } from "../ui";
 import { SubscribeResponseDto } from "../../types";
-import { useAppDispatch } from "../../store/store";
-import { setDisplayedSubscriptionId } from "../../store/ducks";
+import { useAppDispatch, setDisplayedSubscriptionId } from "../../store";
 
 const SubscriptionCard = ({
   subscription,

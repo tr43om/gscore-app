@@ -1,15 +1,20 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { Error, FormInput, PrimaryButton, Tab, Tabs } from "../../components";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../store/rootReducer";
 
-import { useAppDispatch } from "../../store/store";
-import { changePassword, changePersonalInfo } from "../../store/ducks/user";
-import { withAuth } from "../../hocs/withAuth";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
+import { useSelector } from "react-redux";
+import {
+  useAppDispatch,
+  changePassword,
+  changePersonalInfo,
+  selectUser,
+} from "../../store";
+
+import { Error, FormInput, PrimaryButton, Tab, Tabs } from "../../components";
 import { UpdatePasswordDto, ChangePersonalDataDto } from "../../types";
+import { withAuth } from "../../hocs";
 
 const SettingsScreen = (props: SettingsScreenProps) => {
   const user = useSelector(selectUser);

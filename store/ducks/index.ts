@@ -15,8 +15,8 @@ export const reducers = {
 
 // selectors
 export { selectUser, selectUsername } from "./user";
-export { getPaymentStatus } from "./payment";
-export { selectProducts, selectProductById } from "./products";
+export { getPaymentStatus, getCurrentPaymentId } from "./payment";
+export { selectProducts, selectProductById, getProducts } from "./products";
 export {
   selectSubscriptionsSlice,
   selectDisplayedSubscriptionId,
@@ -24,7 +24,13 @@ export {
 export { getActivationStatus, selectCodesById } from "./codes/selectors";
 
 // actions
-export { login, signup } from "./user";
+export {
+  login,
+  signup,
+  logOut,
+  changePersonalInfo,
+  changePassword,
+} from "./user";
 export { makePayment } from "./payment";
 export { getSubscriptions, setDisplayedSubscriptionId } from "./subscriptions";
 export { activateCode, getCodes } from "./codes/actions";

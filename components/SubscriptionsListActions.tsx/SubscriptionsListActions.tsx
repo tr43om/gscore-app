@@ -1,5 +1,6 @@
 import { useSwiper } from "swiper/react";
 import styled from "styled-components";
+
 import { ArrowRightIcon, ArrowLeftIcon } from "../../assets";
 
 const SubscriptionsListActions = ({

@@ -1,12 +1,9 @@
 import styled from "styled-components";
-
-import { LicenceCodeResponseDto } from "../../types/models/LicenceCodeResponseDto";
-import { Checkbox, SecondaryButton } from "../ui";
-import { activateCode } from "../../store/ducks";
-import { useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
-import { getActivationStatus } from "../../store/ducks";
-import { InfoField } from "../ui";
+
+import { Checkbox, SecondaryButton, InfoField } from "../ui";
+import { useAppDispatch, activateCode, getActivationStatus } from "../../store";
+import { LicenceCodeResponseDto } from "../../types";
 
 const LicenseCodeCard = ({ code }: LicenseCodeCardProps) => {
   const dispatch = useAppDispatch();

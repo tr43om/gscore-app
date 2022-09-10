@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { ReactNode } from "react";
+import React, { ReactNode, InputHTMLAttributes } from "react";
 
 // react-hook-form
 import {
@@ -10,10 +10,7 @@ import {
 } from "react-hook-form";
 
 // components
-
 import { Error, TextField } from "../ui";
-
-import { InputHTMLAttributes } from "react";
 
 const FormInput = <TFormValues extends FieldValues>(
   props: FormInputProps<TFormValues>

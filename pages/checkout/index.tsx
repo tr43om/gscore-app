@@ -1,8 +1,11 @@
-import { InferGetServerSidePropsType, NextPage } from "next";
-import { CheckoutScreen } from "../../page-components/CheckoutScreen";
-import { GetServerSideProps } from "next";
+import {
+  InferGetServerSidePropsType,
+  NextPage,
+  GetServerSideProps,
+} from "next";
+
 import { fetchGetProducts } from "../../api";
-import { store } from "../../store/store";
+import { CheckoutScreen } from "../../page-components";
 
 const CheckoutPage: NextPage = ({
   products,

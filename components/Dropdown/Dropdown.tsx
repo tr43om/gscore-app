@@ -1,14 +1,12 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
-import { ArrowDownIcon, LogOutIcon, SettingsIcon } from "../../assets";
-import useOnClickOutside from "../../hooks/useOnOutsideClick";
-
 import Link from "next/link";
-import { useAppDispatch } from "../../store/store";
-import { logOut } from "../../store/ducks/user";
-
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectUsername } from "../../store/ducks";
+import { useOnClickOutside } from "../../hooks";
+
+import { useAppDispatch, selectUsername, logOut } from "../../store";
+
+import { ArrowDownIcon, LogOutIcon, SettingsIcon } from "../../assets";
 
 const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);

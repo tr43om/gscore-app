@@ -1,14 +1,13 @@
-import GlobalStyle from "../../../styles/globals";
+import Head from "next/head";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/lib/integration/react";
 import { ReactNode } from "react";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle, theme } from "../../../styles";
 import { Container } from "../Container";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
-import { ThemeProvider } from "styled-components";
-import { theme } from "../../../styles/theme";
 import { store, persistor } from "../../../store/store";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/lib/integration/react";
-import Head from "next/head";
 
 const BasicLayout = ({ children }: { children: ReactNode }) => {
   return (

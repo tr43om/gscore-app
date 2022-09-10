@@ -1,14 +1,16 @@
+import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../../store/rootReducer";
-import { Dropdown } from "../../Dropdown";
+
+import { useState } from "react";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+
+import { selectUser } from "../../../store";
+import { Dropdown } from "../../Dropdown";
+import { Sidebar } from "../../Sidebar";
 
 import { BurgerIcon } from "../../../assets";
-import { Sidebar } from "../../Sidebar";
-import { useState } from "react";
 
 const Header = (props: HeaderProps) => {
   const { isAuthorized } = useSelector(selectUser);

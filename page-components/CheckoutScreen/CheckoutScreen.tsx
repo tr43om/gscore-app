@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { PrimaryButton, Stepper, CheckoutCard } from "../../components";
-import { useAppDispatch } from "../../store/store";
-import { getProducts } from "../../store/ducks/products";
-import { withAuth } from "../../hocs/withAuth";
+
+import { Stepper, CheckoutCard } from "../../components";
+import { useAppDispatch, getProducts } from "../../store";
 import { ProductResponseDto } from "../../types";
+import { withAuth } from "../../hocs";
+
 const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
   const dispatch = useAppDispatch();
   useEffect(() => {

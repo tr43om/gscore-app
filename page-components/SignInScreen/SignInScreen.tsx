@@ -1,20 +1,24 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { withoutAuth } from "../../hocs";
 
 // redux
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../store/store";
-import { getSubscriptions, login, getCodes } from "../../store/rootReducer";
-import { selectUser } from "../../store/rootReducer";
+import {
+  getSubscriptions,
+  login,
+  getCodes,
+  useAppDispatch,
+  selectUser,
+} from "../../store";
 
 // types
 import { SignInDto } from "../../types";
 
 // components
 import { Stepper, PrimaryButton, FormInput, Error } from "../../components";
-import { withoutAuth } from "../../hocs/withoutAuth";
 
 const SignInScreen = (props: SignInScreenProps) => {
   const dispatch = useAppDispatch();

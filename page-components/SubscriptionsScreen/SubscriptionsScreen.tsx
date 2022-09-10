@@ -1,18 +1,20 @@
 import styled from "styled-components";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import {
+  selectCodesById,
+  selectDisplayedSubscriptionId,
+  selectSubscriptionsSlice,
+} from "../../store";
+
 import {
   LicenseCodeCard,
   PrimaryButton,
   SubscriptionsList,
 } from "../../components";
-import { withAuth } from "../../hocs/withAuth";
-import { useSelector } from "react-redux";
-import { selectSubscriptionsSlice } from "../../store/ducks";
 
-import {
-  selectCodesById,
-  selectDisplayedSubscriptionId,
-} from "../../store/ducks";
-import { RootState } from "../../store/store";
+import { withAuth } from "../../hocs";
 
 const SubscriptionsScreen = (props: SubscriptionsScreenProps) => {
   const { subscriptions } = useSelector(selectSubscriptionsSlice);

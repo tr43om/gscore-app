@@ -1,15 +1,12 @@
-import { Divider } from "../ui/Divider";
 import styled from "styled-components";
-import { ShoppingBasketIcon } from "../../assets";
-import { ProductsType } from "../../types";
 import { useForm } from "react-hook-form";
-import { PrimaryButton } from "../ui/buttons";
-import { makePayment } from "../../store/ducks";
-import { getPaymentStatus } from "../../store/ducks";
 import { useSelector } from "react-redux";
-import { Error } from "../ui";
-import { useAppDispatch } from "../../store/store";
 import { useRouter } from "next/router";
+
+import { makePayment, getPaymentStatus, useAppDispatch } from "../../store";
+import { Divider, PrimaryButton, Error } from "../ui";
+import { ProductResponseDto } from "../../types";
+import { ShoppingBasketIcon } from "../../assets";
 
 const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
   const dispatch = useAppDispatch();
@@ -149,7 +146,7 @@ const StyledBasketIcon = styled(ShoppingBasketIcon)<{ active: boolean }>`
 `;
 
 type CheckoutProductsProps = {
-  products: ProductsType;
+  products: ProductResponseDto[];
 };
 
 export default CheckoutProducts;

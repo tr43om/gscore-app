@@ -1,14 +1,13 @@
-import styled from "styled-components";
-import { SubscribeResponseDto } from "../../types";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import _ from "lodash";
-import { SubscriptionCard } from "../SubscriptionCard";
-import { SubscriptionsListActions } from "../SubscriptionsListActions.tsx";
+import styled, { useTheme } from "styled-components";
 import { useState } from "react";
 
-import { useTheme } from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+
+import { SubscriptionCard } from "../SubscriptionCard";
+import { SubscriptionsListActions } from "../SubscriptionsListActions.tsx";
+
+import { SubscribeResponseDto } from "../../types";
 
 const SubscriptionsList = ({ subscriptions }: SubscriptionsListProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);

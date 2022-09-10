@@ -1,17 +1,19 @@
-import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { Error, PrimaryButton } from "../../components";
+import Link from "next/link";
+import { useSelector } from "react-redux";
 import {
+  useAppDispatch,
   selectProductById,
   selectProducts,
-} from "../../store/ducks/products/selectors";
-import { getCurrentPaymentId } from "../../store/ducks/payment/selectors";
-import { PaymentReceipt } from "../../components";
-import { withAuth } from "../../hocs/withAuth";
-import { getSubscriptions, getCodes } from "../../store/ducks";
-import { selectSubscriptionsSlice } from "../../store/ducks";
-import { useAppDispatch } from "../../store/store";
-import Link from "next/link";
+  selectSubscriptionsSlice,
+  getCurrentPaymentId,
+  getSubscriptions,
+  getCodes,
+} from "../../store";
+
+import { Error, PrimaryButton, PaymentReceipt } from "../../components";
+
+import { withAuth } from "../../hocs";
 
 const StartSubscriptionScreen = (props: StartSubscriptionScreenProps) => {
   const currentPaymentId = useSelector(getCurrentPaymentId);

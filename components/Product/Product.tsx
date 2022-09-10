@@ -1,9 +1,8 @@
-import _ from "lodash";
-import styled from "styled-components";
-import { Divider, SecondaryButton } from "../ui";
-
-import { CheckIconRounded } from "../../assets";
 import Link from "next/link";
+import styled from "styled-components";
+
+import { Divider, SecondaryButton } from "../ui";
+import { CheckIconRounded } from "../../assets";
 
 const Product = (props: ProductProps) => {
   return (

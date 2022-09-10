@@ -1,11 +1,12 @@
 import Link from "next/link";
-import styled from "styled-components";
-import { CrossIcon } from "../../assets";
 import Image from "next/image";
+import styled from "styled-components";
+import { useRef } from "react";
+
+import { useOnClickOutside } from "../../hooks";
 import { Divider } from "../ui";
 import { Dropdown } from "../Dropdown";
-import useOnClickOutside from "../../hooks/useOnOutsideClick";
-import { useRef } from "react";
+import { CrossIcon } from "../../assets";
 
 const Sidebar = (props: SidebarProps) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
