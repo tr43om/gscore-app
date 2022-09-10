@@ -54,7 +54,7 @@ const SettingsScreen = (props: SettingsScreenProps) => {
 
   return (
     <Main>
-      <Title mb={3}>Settings</Title>
+      <ScreenTitle>Settings</ScreenTitle>
       <Tabs $mb="3rem">
         <Tab title="Personal info">
           <Title mb={1.5}>Personal Info</Title>
@@ -132,7 +132,39 @@ const Title = styled.h3<{ mb?: number }>`
       },
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    font: ${({
+      theme: {
+        variants: {
+          specialHeading4: { lineHeight, fontFamily, fontSize },
+        },
+      },
+    }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  }
   margin-bottom: ${({ mb }) => `${mb}rem`};
+`;
+
+const ScreenTitle = styled.h3`
+  margin-bottom: 3rem;
+  font: ${({
+    theme: {
+      variants: {
+        specialHeading2: { lineHeight, fontFamily, fontSize },
+      },
+    },
+  }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    font: ${({
+      theme: {
+        variants: {
+          specialHeading3: { lineHeight, fontFamily, fontSize },
+        },
+      },
+    }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+    margin-bottom: 2rem;
+  }
 `;
 
 const Form = styled.form`

@@ -56,6 +56,17 @@ const Title = styled.li<{ active: boolean }>`
   border-bottom: 2px solid
     ${({ theme: { colors }, active }) => active && colors.accent};
   cursor: pointer;
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    padding-inline: 0.7rem;
+    font: ${({
+      theme: {
+        variants: {
+          textSingle100: { lineHeight, fontFamily, fontSize },
+        },
+      },
+    }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  }
 `;
 
 const Divider = styled.div`
