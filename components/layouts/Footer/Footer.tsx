@@ -63,8 +63,15 @@ const FooterTop = styled.div`
 const FooterBottom = styled.div`
   display: flex;
   justify-content: space-between;
+
   padding-top: 2.75rem;
   border-top: 1px solid ${({ theme: { colors } }) => colors.neutral700};
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+  }
 `;
 
 const CopyrightText = styled.div``;
