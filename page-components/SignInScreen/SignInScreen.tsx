@@ -38,7 +38,7 @@ const SignInScreen = (props: SignInScreenProps) => {
 
   return (
     <Main>
-      <Stepper $step={2} $mb="4rem" />
+      <Stepper $step={2} />
       <Title mb={2}>Log in</Title>
 
       <Form onSubmit={signIn}>

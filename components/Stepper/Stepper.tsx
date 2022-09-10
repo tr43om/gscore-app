@@ -27,7 +27,12 @@ type StepperProps = {
 const Root = styled.div<{ mb: string }>`
   display: flex;
   gap: 1rem;
-  margin-bottom: ${({ mb }) => mb};
+  margin-bottom: 4rem;
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const Step = styled.div`
@@ -45,6 +50,16 @@ const StepTitle = styled.p`
       },
     },
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    font: ${({
+      theme: {
+        variants: {
+          textSingle100Regular: { lineHeight, fontFamily, fontSize },
+        },
+      },
+    }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  }
 `;
 
 const Bar = styled.div<{ isActive: boolean }>`

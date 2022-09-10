@@ -11,7 +11,7 @@ export const withAuth = <P extends object>(Component: FC<P>) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (!token) router.push("/signin");
+      if (!token) router.push("/signup");
     }, [router, token]);
 
     return token ? <Component {...props} /> : <Spinner />;

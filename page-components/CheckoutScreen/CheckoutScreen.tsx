@@ -12,7 +12,7 @@ const CheckoutScreen = ({ products }: CheckoutScreenProps) => {
   }, [dispatch]);
   return (
     <Main>
-      <Stepper $step={3} $mb="4rem" />
+      <Stepper $step={3} />
       <Title mb={2}>Checkout</Title>
 
       <CheckoutCard products={products} />

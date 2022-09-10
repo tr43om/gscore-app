@@ -10,14 +10,15 @@ import { signup } from "../../store/rootReducer";
 import { selectUser } from "../../store/rootReducer";
 import { useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
-import { SignUpValues } from "../../types";
 import { withoutAuth } from "../../hocs/withoutAuth";
+
+import { SignUpDto } from "../../types";
 
 const SignUpScreen = (props: SignUpScreenProps) => {
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
 
-  const { handleSubmit, control } = useForm<SignUpValues>({
+  const { handleSubmit, control } = useForm<SignUpDto>({
     defaultValues: {
       username: "",
       email: "",
@@ -32,7 +33,7 @@ const SignUpScreen = (props: SignUpScreenProps) => {
 
   return (
     <Main>
-      <Stepper $step={1} $mb="4rem" />
+      <Stepper $step={1} />
       <Title mb={1}>Create account</Title>
       <Description mb={2}>
         You need to enter your name and email. We will send you a temporary
