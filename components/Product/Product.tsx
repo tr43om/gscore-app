@@ -7,11 +7,11 @@ import Link from "next/link";
 
 const Product = (props: ProductProps) => {
   return (
-    <Root accent={props.$accent || false}>
+    <Root $accent={props.accent || false}>
       <Info>
         <Price>${props.price}</Price>
         <Offer>{props.offer}</Offer>
-        <Description accent={props.$accent || false}>
+        <Description $accent={props.accent || false}>
           {props.description}
         </Description>
       </Info>
@@ -36,20 +36,25 @@ type ProductProps = {
   offer: string;
   description: string;
   features: string[];
-  $accent?: boolean;
+  accent?: boolean;
   onClick?: () => void;
 };
 
-const Root = styled.section<{ accent: boolean }>`
-  background-color: ${({ theme, accent }) =>
-    !accent ? theme.colors.neutral700 : theme.colors.accent};
-  padding-inline: 3rem;
-  padding-block: 2.625rem;
+const Root = styled.section<{ $accent: boolean }>`
+  background-color: ${({ theme }) => theme.colors.neutral700};
+
   border-radius: 12px;
   max-width: 24.5rem;
 
-  @media screen and (min-width: 1200px) {
-    transform: ${({ accent }) => accent && "translateY(-3rem)"};
+  padding-inline: 1.5rem;
+  padding-block: 2rem;
+
+  @media screen and (min-width: 1299px) {
+    transform: ${({ $accent }) => $accent && "translateY(-3rem)"};
+    background-color: ${({ theme, $accent }) =>
+      !$accent ? theme.colors.neutral700 : theme.colors.accent};
+    padding-inline: 3rem;
+    padding-block: 2.625rem;
   }
 `;
 
@@ -79,10 +84,10 @@ const Offer = styled.p`
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
 `;
 
-const Description = styled.p<{ accent: boolean }>`
+const Description = styled.p<{ $accent: boolean }>`
   font-family: ${({ theme: { fonts } }) => fonts.thicccboi500};
-  color: ${({ theme, accent }) =>
-    !accent ? theme.colors.neutral400 : theme.colors.neutral100};
+  color: ${({ theme, $accent }) =>
+    !$accent ? theme.colors.neutral400 : theme.colors.neutral100};
 `;
 
 const Features = styled.ul`

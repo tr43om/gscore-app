@@ -22,6 +22,18 @@ const Title = styled.h1`
   }) => `${fontSize}/${lineHeight} ${fontFamily}`};
   text-align: center;
   margin-bottom: 6.125rem;
+
+  @media ${({ theme: { devices } }) => devices.laptopAndBelow} {
+    margin-bottom: 3rem;
+
+    font: ${({
+      theme: {
+        variants: {
+          specialHeading4: { lineHeight, fontFamily, fontSize },
+        },
+      },
+    }) => `${fontSize}/${lineHeight} ${fontFamily}`};
+  }
 `;
 
 type HomeScreenProps = {};

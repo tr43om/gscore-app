@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Product } from "../Product";
-import { useRouter } from "next/router";
+
 const ProductsList = (props: ProductsListProps) => {
-  const router = useRouter();
   return (
     <Root>
       <Product
@@ -27,7 +26,7 @@ const ProductsList = (props: ProductsListProps) => {
           "Unlimited Pages and Keywords",
           "Billed annually",
         ]}
-        $accent
+        accent
       />
 
       <Product
@@ -50,7 +49,7 @@ const Root = styled.section`
   justify-content: center;
   justify-items: center;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 1.7rem;
 `;
 
