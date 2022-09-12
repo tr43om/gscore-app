@@ -8,6 +8,8 @@ import { Divider } from "../ui";
 import { Dropdown } from "../Dropdown";
 import { CrossIcon } from "../../assets";
 
+import { Routes } from "../../constants";
+
 const Sidebar = (props: SidebarProps) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(sidebarRef, props.closeSidebar);
@@ -16,7 +18,7 @@ const Sidebar = (props: SidebarProps) => {
       <SidebarContent ref={sidebarRef}>
         <Header>
           <CrossIcon width={27} height={27} onClick={props.closeSidebar} />
-          <Link href="/">
+          <Link href={Routes.HOME}>
             <Image src="/images/Logo.svg" alt="logo" width="130" height="32" />
           </Link>
         </Header>

@@ -3,6 +3,7 @@ import { getCookie } from "cookies-next";
 import { ACCESS_TOKEN } from "../constants";
 import { useRouter } from "next/router";
 import { Spinner } from "../components";
+import { Routes } from "../constants";
 import type { FC } from "react";
 
 export const withAuth = <P extends object>(Component: FC<P>) => {
@@ -11,7 +12,7 @@ export const withAuth = <P extends object>(Component: FC<P>) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (!token) router.push("/signup");
+      if (!token) router.push(Routes.SIGN_UP);
     }, [router, token]);
 
     return token ? <Component {...props} /> : <Spinner />;

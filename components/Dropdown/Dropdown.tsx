@@ -7,6 +7,7 @@ import { useOnClickOutside } from "../../hooks";
 import { useAppDispatch, selectUsername, logOut } from "../../store";
 
 import { ArrowDownIcon, LogOutIcon, SettingsIcon } from "../../assets";
+import { Routes } from "../../constants";
 
 const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,13 +26,13 @@ const Dropdown = (props: DropdownProps) => {
       </DropdownLabel>
       {isOpen && (
         <DropdownItems ref={dropdownRef}>
-          <Link href="/settings">
+          <Link href={Routes.SETTINGS}>
             <DropdownItem>
               <SettingsIconStyled />
               <Label>Settings</Label>
             </DropdownItem>
           </Link>
-          <Link href="/">
+          <Link href={Routes.HOME}>
             <DropdownItem onClick={() => dispatch(logOut())}>
               <LogOutIconStyled />
               <Label>Logout</Label>

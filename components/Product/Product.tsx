@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Divider, SecondaryButton } from "../ui";
 import { CheckIconRounded } from "../../assets";
 
+import { Routes } from "../../constants";
+
 const Product = (props: ProductProps) => {
   return (
     <Root $accent={props.accent || false}>
@@ -23,7 +25,7 @@ const Product = (props: ProductProps) => {
           </Feature>
         ))}
       </Features>
-      <Link href="/checkout">
+      <Link href={Routes.CHECKOUT}>
         <OfferButton>Get Gscore</OfferButton>
       </Link>
     </Root>

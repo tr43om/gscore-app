@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 import styled from "styled-components";
 import Link from "next/link";
@@ -13,10 +14,12 @@ import { Stepper, PrimaryButton, FormInput } from "../../components";
 import { withoutAuth } from "../../hocs";
 
 import { SignUpDto } from "../../types";
+import { Routes } from "../../constants";
 
 const SignUpScreen = (props: SignUpScreenProps) => {
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
+  const router = useRouter();
 
   const { handleSubmit, control } = useForm<SignUpDto>({
     defaultValues: {
@@ -29,7 +32,10 @@ const SignUpScreen = (props: SignUpScreenProps) => {
     mode: "onChange",
   });
 
-  const signUp = handleSubmit((data) => dispatch(signup(data)));
+  const signUp = handleSubmit((data) => {
+    dispatch(signup(data));
+    router.push(Routes.CHECKOUT);
+  });
 
   return (
     <Main>
@@ -58,7 +64,7 @@ const SignUpScreen = (props: SignUpScreenProps) => {
       </Form>
 
       <NextStepLink>
-        Have an account? <Link href="/signin">Go to the next step</Link>
+        Have an account? <Link href={Routes.SIGN_IN}>Go to the next step</Link>
       </NextStepLink>
     </Main>
   );

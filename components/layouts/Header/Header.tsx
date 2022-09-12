@@ -12,14 +12,20 @@ import { Sidebar } from "../../Sidebar";
 
 import { BurgerIcon } from "../../../assets";
 
+import { Routes } from "../../../constants";
+
 const Header = (props: HeaderProps) => {
   const { isAuthorized } = useSelector(selectUser);
   const { pathname } = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const isShown =
+    isAuthorized &&
+    pathname !== Routes.START_SUBSCRIPTION &&
+    pathname !== Routes.CHECKOUT;
 
   return (
     <HeaderContainer>
-      <Link href="/">
+      <Link href={Routes.HOME}>
         <Image
           src="/images/Logo.svg"
           alt="logo"
@@ -29,25 +35,23 @@ const Header = (props: HeaderProps) => {
         />
       </Link>
 
-      {isAuthorized &&
-        pathname !== "/start-subscription" &&
-        pathname !== "/checkout" && (
-          <>
-            <LaptopAndBelow>
-              <BurgerIcon onClick={() => setIsSidebarOpen(true)} />
-              {isSidebarOpen && (
-                <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
-              )}
-            </LaptopAndBelow>
+      {isShown && (
+        <>
+          <LaptopAndBelow>
+            <BurgerIcon onClick={() => setIsSidebarOpen(true)} />
+            {isSidebarOpen && (
+              <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
+            )}
+          </LaptopAndBelow>
 
-            <Desktop>
-              <Link href="/subscriptions">
-                <StyledLink>My subscriptions</StyledLink>
-              </Link>
-              <Dropdown />
-            </Desktop>
-          </>
-        )}
+          <Desktop>
+            <Link href="/subscriptions">
+              <StyledLink>My subscriptions</StyledLink>
+            </Link>
+            <Dropdown />
+          </Desktop>
+        </>
+      )}
     </HeaderContainer>
   );
 };

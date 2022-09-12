@@ -7,6 +7,7 @@ import { makePayment, getPaymentStatus, useAppDispatch } from "../../store";
 import { Divider, PrimaryButton, Error } from "../ui";
 import { ProductResponseDto } from "../../types";
 import { ShoppingBasketIcon } from "../../assets";
+import { Routes } from "../../constants";
 
 const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
   const onSubmit = handleSubmit((data) => {
     const { product } = data;
     dispatch(makePayment(+product));
-    router.push("/start-subscription");
+    router.push(Routes.START_SUBSCRIPTION);
   });
 
   return (

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { withoutAuth } from "../../hocs";
+import { useRouter } from "next/router";
 
 // redux
 import { useSelector } from "react-redux";
@@ -19,10 +20,12 @@ import { SignInDto } from "../../types";
 
 // components
 import { Stepper, PrimaryButton, FormInput, Error } from "../../components";
+import { Routes } from "../../constants";
 
 const SignInScreen = (props: SignInScreenProps) => {
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
+  const router = useRouter();
 
   const { handleSubmit, control } = useForm<SignInDto>({
     defaultValues: {
@@ -38,6 +41,7 @@ const SignInScreen = (props: SignInScreenProps) => {
     await dispatch(login(data));
     await dispatch(getSubscriptions());
     await dispatch(getCodes());
+    router.push(Routes.CHECKOUT);
   });
 
   return (
